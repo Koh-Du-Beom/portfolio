@@ -45,7 +45,7 @@ export default function ExperienceSection() {
           {/* Horizontal line with gradient toward current */}
           <div className="absolute top-[1.125rem] left-0 right-0 h-px bg-gradient-to-r from-zinc-700 to-blue-400/60" />
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {experiences.map((item, i) => (
               <motion.div
                 key={item.period}

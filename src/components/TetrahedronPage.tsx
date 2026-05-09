@@ -58,7 +58,7 @@ export default function TetrahedronPage() {
       <div
         className={`fixed inset-0 z-0 flex items-center justify-center transition-all duration-700 ${
           activeSection
-            ? "opacity-10 scale-75 blur-md pointer-events-none"
+            ? "opacity-10 scale-75 md:scale-75 blur-md pointer-events-none"
             : ""
         }`}
       >

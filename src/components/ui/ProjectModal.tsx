@@ -32,7 +32,7 @@ function ModalContent({ project, onClose }: { project: Project; onClose: () => v
     >
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
       <motion.article
-        className="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-zinc-700 bg-zinc-900 p-6 md:p-8"
+        className="relative max-h-[85dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-zinc-700 bg-zinc-900 p-5 sm:p-6 md:p-8"
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}

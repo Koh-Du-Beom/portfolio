@@ -497,7 +497,7 @@ export default function TetrahedronScene({
   return (
     <Canvas
       camera={{ position: [0, 0.5, 4.2], fov: 50 }}
-      dpr={[1, 1.5]}
+      dpr={typeof window !== "undefined" && window.innerWidth < 768 ? [1, 1] : [1, 1.5]}
       gl={{ antialias: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
       onPointerMissed={handleReset}

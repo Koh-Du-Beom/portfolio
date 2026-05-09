@@ -1,13 +1,12 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
-function ParticleField() {
+function ParticleField({ count }: { count: number }) {
   const ref = useRef<THREE.Points>(null);
-  const count = 3000;
 
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
@@ -20,7 +19,7 @@ function ParticleField() {
       pos[i * 3 + 2] = r * Math.cos(phi);
     }
     return pos;
-  }, []);
+  }, [count]);
 
   useFrame((state) => {
     if (!ref.current) return;
@@ -43,15 +42,21 @@ function ParticleField() {
 }
 
 export default function PointCloudHero() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
   return (
     <div className="absolute inset-0 -z-10">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 60 }}
-        dpr={[1, 1.5]}
+        dpr={isMobile ? [1, 1] : [1, 1.5]}
         gl={{ antialias: false, powerPreference: "high-performance" }}
       >
         <ambientLight intensity={0.5} />
-        <ParticleField />
+        <ParticleField count={isMobile ? 1500 : 3000} />
       </Canvas>
     </div>
   );

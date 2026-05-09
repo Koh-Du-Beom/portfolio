@@ -41,3 +41,8 @@ body {
 canvas {
   touch-action: none;
 }
+
+/* Mobile touch optimizations */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}
