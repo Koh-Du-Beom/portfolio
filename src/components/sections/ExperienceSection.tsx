@@ -21,6 +21,7 @@ const experiences = [
   {
     title: "주식회사 디프리",
     period: "2024.12 ~ 현재",
+    subtitle: "소프트웨어 엔지니어",
     current: true,
   },
 ];
