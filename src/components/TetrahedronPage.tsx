@@ -75,7 +75,10 @@ export default function TetrahedronPage() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="h-0.5 w-48 overflow-hidden rounded-full bg-zinc-800">
+              <p className="text-sm tracking-widest text-zinc-500 uppercase md:text-base font-light">
+                <span className="text-zinc-300 font-medium">고두범의</span> — Portfolio
+              </p>
+              <div className="mt-3 h-0.5 w-48 overflow-hidden rounded-full bg-zinc-800">
                 <motion.div
                   className="h-full bg-zinc-400"
                   initial={{ x: "-100%" }}
