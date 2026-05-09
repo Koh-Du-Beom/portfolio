@@ -3,10 +3,22 @@
 import { motion } from "framer-motion";
 
 const highlights = [
-  { keyword: "End-to-End 제품 책임", desc: "기획부터 운영까지" },
-  { keyword: "B2G 플랫폼 단독 개발", desc: "사용자 N명 규모" },
-  { keyword: "인프라·보안까지 1인 운영", desc: "온프레미스 포함" },
-  { keyword: "양방향 외주 경험", desc: "발주자·수주자 모두" },
+  {
+    keyword: "문제의 본질부터",
+    desc: "무엇을 만들지 고민하기 이전에, 이것이 정말 해결해야 할 진짜 문제인지 먼저 묻습니다.",
+  },
+  {
+    keyword: "수단의 제약 없이",
+    desc: "프론트엔드라는 직함에 선을 긋지 않고, 인프라든 백엔드든 문제 해결에 필요한 무기라면 주저 없이 쥡니다.",
+  },
+  {
+    keyword: "동작, 그 너머의 구조",
+    desc: "오늘 당장 작동하는 코드에 만족하지 않고, 내일의 변화를 버텨낼 단단한 아키텍처를 설계합니다.",
+  },
+  {
+    keyword: "코드 밖의 임팩트",
+    desc: "단순한 기능 개발을 넘어, 치열한 최적화와 인프라 비용 절감으로 비즈니스에 실질적인 이득을 남깁니다.",
+  },
 ];
 
 const education = [
@@ -56,50 +68,37 @@ export default function AboutSection() {
           About
         </motion.h2>
         <motion.p
-          className="mt-4 text-xl font-semibold text-blue-400"
+          className="mt-4 text-xl font-semibold leading-relaxed text-blue-400"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.05 }}
         >
-          제품 하나를 처음부터 끝까지 책임지는 풀스택 개발자
+          문제의 본질을 먼저 의심하고,
+          <br />
+          작동을 넘어 비즈니스에 실질적인 가치를 설계합니다.
         </motion.p>
-        <motion.div
-          className="mt-6 text-lg leading-relaxed text-zinc-300"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-        >
-          <p>
-            비탈면 유지관리 플랫폼을 프론트엔드부터 온프레미스 보안 인프라까지
-            혼자 설계·구축·운영하고 있습니다. 기술 스택보다 문제 해결을 우선하며,
-            작은 팀에서도 안정적으로 굴러가는 시스템을 만드는 데 집중합니다.
-          </p>
-          <p className="mt-3 text-sm text-zinc-400">
-            Spring Boot · Docker · CI/CD · nginx · Cloudflare Workers
-            <span className="ml-1 text-zinc-500">
-              — 필요한 도구는 직접 익혀서 씁니다.
-            </span>
-          </p>
-        </motion.div>
 
         {/* Highlights */}
-        <ul className="mt-8 grid gap-4 md:grid-cols-2">
+        <ul className="mt-10 grid gap-4 md:grid-cols-2">
           {highlights.map((item, i) => (
             <motion.li
               key={i}
-              className="flex items-start gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 p-4"
+              className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 transition-colors hover:border-zinc-700"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-blue-400" />
-              <span className="text-sm text-zinc-300">
-                <strong className="text-zinc-100">{item.keyword}</strong>
-                <span className="ml-1 text-zinc-500">— {item.desc}</span>
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400" />
+                <strong className="text-base font-semibold text-zinc-100">
+                  {item.keyword}
+                </strong>
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                {item.desc}
+              </p>
             </motion.li>
           ))}
         </ul>
