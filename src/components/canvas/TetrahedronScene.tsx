@@ -28,61 +28,106 @@ const edgePairs: [number, number][] = [
 ];
 
 const COLOR_WHITE = new THREE.Color(1, 1, 1);
-const COLOR_DIM = new THREE.Color(0.45, 0.45, 0.45);
+const COLOR_DIM = new THREE.Color(0.55, 0.55, 0.55);
 
 /* ── Canvas texture helpers ── */
 
 function drawIcon(ctx: CanvasRenderingContext2D, type: string, cx: number, cy: number, r: number) {
   ctx.strokeStyle = "#ffffff";
   ctx.fillStyle = "transparent";
-  ctx.lineWidth = r * 0.13;
+  ctx.lineWidth = r * 0.12;
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
 
   switch (type) {
     case "about":
+      // Person: head circle + shoulders arc
       ctx.beginPath();
-      ctx.arc(cx, cy - r * 0.22, r * 0.26, 0, Math.PI * 2);
+      ctx.arc(cx, cy - r * 0.18, r * 0.22, 0, Math.PI * 2);
       ctx.stroke();
       ctx.beginPath();
-      ctx.arc(cx, cy + r * 0.85, r * 0.44, Math.PI * 1.15, Math.PI * 1.85);
+      ctx.moveTo(cx - r * 0.38, cy + r * 0.42);
+      ctx.quadraticCurveTo(cx - r * 0.38, cy + r * 0.08, cx, cy + r * 0.08);
+      ctx.quadraticCurveTo(cx + r * 0.38, cy + r * 0.08, cx + r * 0.38, cy + r * 0.42);
       ctx.stroke();
       break;
     case "experience":
+      // Timeline: vertical line with 3 dots/circles
       ctx.beginPath();
-      ctx.roundRect(cx - r * 0.48, cy - r * 0.08, r * 0.96, r * 0.58, r * 0.08);
+      ctx.moveTo(cx - r * 0.18, cy - r * 0.38);
+      ctx.lineTo(cx - r * 0.18, cy + r * 0.38);
       ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(cx - r * 0.2, cy - r * 0.08);
-      ctx.lineTo(cx - r * 0.2, cy - r * 0.32);
-      ctx.lineTo(cx + r * 0.2, cy - r * 0.32);
-      ctx.lineTo(cx + r * 0.2, cy - r * 0.08);
-      ctx.stroke();
+      for (const dy of [-r * 0.28, 0, r * 0.28]) {
+        ctx.beginPath();
+        ctx.arc(cx - r * 0.18, cy + dy, r * 0.07, 0, Math.PI * 2);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+        // horizontal tick line
+        ctx.beginPath();
+        ctx.moveTo(cx - r * 0.06, cy + dy);
+        ctx.lineTo(cx + r * 0.32, cy + dy);
+        ctx.stroke();
+      }
+      ctx.fillStyle = "transparent";
       break;
     case "projects":
+      // Terminal window: rounded rect with prompt
       ctx.beginPath();
-      ctx.moveTo(cx - r * 0.12, cy - r * 0.38);
-      ctx.lineTo(cx - r * 0.48, cy);
-      ctx.lineTo(cx - r * 0.12, cy + r * 0.38);
+      ctx.roundRect(cx - r * 0.44, cy - r * 0.32, r * 0.88, r * 0.64, r * 0.08);
+      ctx.stroke();
+      // title bar line
+      ctx.beginPath();
+      ctx.moveTo(cx - r * 0.44, cy - r * 0.16);
+      ctx.lineTo(cx + r * 0.44, cy - r * 0.16);
+      ctx.stroke();
+      // dot in title bar
+      ctx.beginPath();
+      ctx.arc(cx - r * 0.3, cy - r * 0.24, r * 0.04, 0, Math.PI * 2);
+      ctx.fillStyle = "#ffffff";
+      ctx.fill();
+      ctx.fillStyle = "transparent";
+      // prompt >_
+      ctx.beginPath();
+      ctx.moveTo(cx - r * 0.24, cy + r * 0.0);
+      ctx.lineTo(cx - r * 0.1, cy + r * 0.1);
+      ctx.lineTo(cx - r * 0.24, cy + r * 0.2);
       ctx.stroke();
       ctx.beginPath();
-      ctx.moveTo(cx + r * 0.12, cy - r * 0.38);
-      ctx.lineTo(cx + r * 0.48, cy);
-      ctx.lineTo(cx + r * 0.12, cy + r * 0.38);
+      ctx.moveTo(cx - r * 0.02, cy + r * 0.2);
+      ctx.lineTo(cx + r * 0.18, cy + r * 0.2);
       ctx.stroke();
       break;
     case "skills":
+      // Hexagon: tech/stack feel
       ctx.beginPath();
-      for (let i = 0; i < 10; i++) {
-        const angle = (i * Math.PI) / 5 - Math.PI / 2;
-        const rad = i % 2 === 0 ? r * 0.42 : r * 0.18;
-        const x = cx + rad * Math.cos(angle);
-        const y = cy + rad * Math.sin(angle);
+      for (let i = 0; i < 6; i++) {
+        const angle = (i * Math.PI) / 3 - Math.PI / 2;
+        const x = cx + r * 0.4 * Math.cos(angle);
+        const y = cy + r * 0.4 * Math.sin(angle);
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
       ctx.closePath();
       ctx.stroke();
+      // inner smaller hexagon
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (i * Math.PI) / 3 - Math.PI / 2;
+        const x = cx + r * 0.2 * Math.cos(angle);
+        const y = cy + r * 0.2 * Math.sin(angle);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.stroke();
+      // connecting lines from inner to outer vertices
+      for (let i = 0; i < 6; i++) {
+        const angle = (i * Math.PI) / 3 - Math.PI / 2;
+        ctx.beginPath();
+        ctx.moveTo(cx + r * 0.2 * Math.cos(angle), cy + r * 0.2 * Math.sin(angle));
+        ctx.lineTo(cx + r * 0.4 * Math.cos(angle), cy + r * 0.4 * Math.sin(angle));
+        ctx.stroke();
+      }
       break;
   }
 }
@@ -131,7 +176,6 @@ function Face({
   const [hovered, setHovered] = useState(false);
   const iconMatRef = useRef<THREE.MeshBasicMaterial>(null);
   const textMatRef = useRef<THREE.MeshBasicMaterial>(null);
-  const textMeshRef = useRef<THREE.Mesh>(null);
 
   const { geometry, centroid, quaternion, normalVec, centroidVec, iconTex, textTex } =
     useMemo(() => {
@@ -197,13 +241,10 @@ function Face({
       iconMatRef.current.color.lerp(show ? COLOR_WHITE : COLOR_DIM, 0.14);
     }
 
-    // Text fade + slide (in local Y axis = along face surface)
+    // Text fade (always visible, brighter on hover)
     if (textMatRef.current) {
-      textMatRef.current.opacity += ((show ? 1 : 0) - textMatRef.current.opacity) * 0.14;
-    }
-    if (textMeshRef.current) {
-      const targetY = show ? -0.28 : -0.2;
-      textMeshRef.current.position.y += (targetY - textMeshRef.current.position.y) * 0.14;
+      const targetOpacity = show ? 1 : 0.5;
+      textMatRef.current.opacity += (targetOpacity - textMatRef.current.opacity) * 0.14;
     }
   });
 
@@ -252,13 +293,13 @@ function Face({
           />
         </mesh>
         {/* Text label below icon */}
-        <mesh ref={textMeshRef} position={[0, -0.2, 0.02]} raycast={() => {}}>
+        <mesh position={[0, -0.24, 0.02]} raycast={() => {}}>
           <planeGeometry args={[0.65, 0.12]} />
           <meshBasicMaterial
             ref={textMatRef}
             map={textTex}
             transparent
-            opacity={0}
+            opacity={0.5}
             side={THREE.DoubleSide}
             depthWrite={false}
           />
