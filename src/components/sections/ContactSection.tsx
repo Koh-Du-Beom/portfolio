@@ -30,7 +30,7 @@ const emails = [
 
 export default function ContactSection() {
   return (
-    <footer id="contact" className="border-t border-zinc-800 py-24 md:py-32" role="contentinfo">
+    <footer id="contact" className="border-t border-zinc-800 py-12 md:py-16" role="contentinfo">
       <div className="mx-auto max-w-4xl px-6 text-center">
         <motion.h2
           className="text-3xl font-bold text-zinc-100"
@@ -40,7 +40,7 @@ export default function ContactSection() {
         >
           Contact
         </motion.h2>
-        <motion.p
+        {/* <motion.p
           className="mt-4 text-zinc-400"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -48,7 +48,7 @@ export default function ContactSection() {
           transition={{ delay: 0.1 }}
         >
           함께 일하고 싶으시다면 연락주세요.
-        </motion.p>
+        </motion.p> */}
 
         <motion.div
           className="mt-8 flex flex-col items-center gap-3 text-sm text-zinc-400"
