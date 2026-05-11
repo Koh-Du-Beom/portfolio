@@ -1,11 +1,21 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-body {
-  font-family: "Pretendard", system-ui, -apple-system, sans-serif;
+  body {
+    font-family: "Pretendard", system-ui, -apple-system, sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  :root {
+    --cm-overlay: rgba(9, 9, 11, 0.95);
+    --cm-nav: rgba(9, 9, 11, 0.85);
+    --scrollbar-track: #18181b;
+    --scrollbar-thumb: #3f3f46;
+  }
 }
 
 /* Scrollbar */
@@ -14,11 +24,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #18181b;
+  background: var(--scrollbar-track, #18181b);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
+  background: var(--scrollbar-thumb, #3f3f46);
   border-radius: 3px;
 }
 

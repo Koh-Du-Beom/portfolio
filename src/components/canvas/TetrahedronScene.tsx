@@ -27,9 +27,6 @@ const edgePairs: [number, number][] = [
   [0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3],
 ];
 
-const COLOR_WHITE = new THREE.Color(1, 1, 1);
-const COLOR_DIM = new THREE.Color(0.55, 0.55, 0.55);
-
 /* ── Canvas texture helpers ── */
 
 function drawIcon(ctx: CanvasRenderingContext2D, type: string, cx: number, cy: number, r: number) {
@@ -41,7 +38,6 @@ function drawIcon(ctx: CanvasRenderingContext2D, type: string, cx: number, cy: n
 
   switch (type) {
     case "about":
-      // Person: head circle + shoulders arc
       ctx.beginPath();
       ctx.arc(cx, cy - r * 0.18, r * 0.22, 0, Math.PI * 2);
       ctx.stroke();
@@ -52,7 +48,6 @@ function drawIcon(ctx: CanvasRenderingContext2D, type: string, cx: number, cy: n
       ctx.stroke();
       break;
     case "experience":
-      // Timeline: vertical line with 3 dots/circles
       ctx.beginPath();
       ctx.moveTo(cx - r * 0.18, cy - r * 0.38);
       ctx.lineTo(cx - r * 0.18, cy + r * 0.38);
@@ -62,7 +57,6 @@ function drawIcon(ctx: CanvasRenderingContext2D, type: string, cx: number, cy: n
         ctx.arc(cx - r * 0.18, cy + dy, r * 0.07, 0, Math.PI * 2);
         ctx.fillStyle = "#ffffff";
         ctx.fill();
-        // horizontal tick line
         ctx.beginPath();
         ctx.moveTo(cx - r * 0.06, cy + dy);
         ctx.lineTo(cx + r * 0.32, cy + dy);
@@ -71,22 +65,18 @@ function drawIcon(ctx: CanvasRenderingContext2D, type: string, cx: number, cy: n
       ctx.fillStyle = "transparent";
       break;
     case "projects":
-      // Terminal window: rounded rect with prompt
       ctx.beginPath();
       ctx.roundRect(cx - r * 0.44, cy - r * 0.32, r * 0.88, r * 0.64, r * 0.08);
       ctx.stroke();
-      // title bar line
       ctx.beginPath();
       ctx.moveTo(cx - r * 0.44, cy - r * 0.16);
       ctx.lineTo(cx + r * 0.44, cy - r * 0.16);
       ctx.stroke();
-      // dot in title bar
       ctx.beginPath();
       ctx.arc(cx - r * 0.3, cy - r * 0.24, r * 0.04, 0, Math.PI * 2);
       ctx.fillStyle = "#ffffff";
       ctx.fill();
       ctx.fillStyle = "transparent";
-      // prompt >_
       ctx.beginPath();
       ctx.moveTo(cx - r * 0.24, cy + r * 0.0);
       ctx.lineTo(cx - r * 0.1, cy + r * 0.1);
@@ -98,7 +88,6 @@ function drawIcon(ctx: CanvasRenderingContext2D, type: string, cx: number, cy: n
       ctx.stroke();
       break;
     case "skills":
-      // Hexagon: tech/stack feel
       ctx.beginPath();
       for (let i = 0; i < 6; i++) {
         const angle = (i * Math.PI) / 3 - Math.PI / 2;
@@ -109,7 +98,6 @@ function drawIcon(ctx: CanvasRenderingContext2D, type: string, cx: number, cy: n
       }
       ctx.closePath();
       ctx.stroke();
-      // inner smaller hexagon
       ctx.beginPath();
       for (let i = 0; i < 6; i++) {
         const angle = (i * Math.PI) / 3 - Math.PI / 2;
@@ -120,7 +108,6 @@ function drawIcon(ctx: CanvasRenderingContext2D, type: string, cx: number, cy: n
       }
       ctx.closePath();
       ctx.stroke();
-      // connecting lines from inner to outer vertices
       for (let i = 0; i < 6; i++) {
         const angle = (i * Math.PI) / 3 - Math.PI / 2;
         ctx.beginPath();
@@ -167,15 +154,26 @@ function Face({
   label,
   iconType,
   onSelect,
+  isLight,
 }: {
   indices: readonly [number, number, number];
   label: string;
   iconType: string;
   onSelect: () => void;
+  isLight: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
   const iconMatRef = useRef<THREE.MeshBasicMaterial>(null);
   const textMatRef = useRef<THREE.MeshBasicMaterial>(null);
+
+  const colorBright = useMemo(
+    () => new THREE.Color(isLight ? 0x09090b : 0xffffff),
+    [isLight]
+  );
+  const colorDim = useMemo(
+    () => new THREE.Color(isLight ? 0x52525b : 0x888888),
+    [isLight]
+  );
 
   const { geometry, centroid, quaternion, normalVec, centroidVec, iconTex, textTex } =
     useMemo(() => {
@@ -201,8 +199,6 @@ function Face({
       const n = new THREE.Vector3().crossVectors(e1, e2).normalize();
       if (n.dot(cVec) < 0) n.negate();
 
-      // Use direction from centroid to first vertex as "up" on the face.
-      // This vector lies on the face plane, so no degenerate projection for any face.
       const up = new THREE.Vector3()
         .subVectors(new THREE.Vector3(...vertices[indices[0]]), cVec)
         .normalize();
@@ -224,6 +220,12 @@ function Face({
 
   const facingRef = useRef(true);
 
+  // Immediately snap material colors when theme switches
+  useEffect(() => {
+    if (iconMatRef.current) iconMatRef.current.color.copy(colorDim);
+    if (textMatRef.current) textMatRef.current.color.copy(colorBright);
+  }, [isLight, colorDim, colorBright]);
+
   useFrame(({ camera }) => {
     const toCamera = camera.position.clone().sub(centroidVec).normalize();
     const facing = normalVec.dot(toCamera) > 0;
@@ -236,41 +238,54 @@ function Face({
 
     const show = hovered && facing;
 
-    // Icon brightness
     if (iconMatRef.current) {
-      iconMatRef.current.color.lerp(show ? COLOR_WHITE : COLOR_DIM, 0.14);
+      iconMatRef.current.color.lerp(show ? colorBright : colorDim, 0.14);
     }
 
-    // Text fade (always visible, brighter on hover)
     if (textMatRef.current) {
-      const targetOpacity = show ? 1 : 0.5;
+      textMatRef.current.color.lerp(colorBright, 0.14);
+      const targetOpacity = show ? 1 : isLight ? 0.7 : 0.5;
       textMatRef.current.opacity += (targetOpacity - textMatRef.current.opacity) * 0.14;
     }
   });
 
+  const handlePointerOver = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (e: any) => {
+      e.stopPropagation();
+      if (!facingRef.current) return;
+      setHovered(true);
+      document.body.style.cursor = "pointer";
+    },
+    []
+  );
+
+  const handlePointerOut = useCallback(() => {
+    setHovered(false);
+    document.body.style.cursor = "auto";
+  }, []);
+
+  const handleClick = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (e: any) => {
+      e.stopPropagation();
+      if (!facingRef.current) return;
+      onSelect();
+    },
+    [onSelect]
+  );
+
   return (
     <group>
-      {/* Clickable triangle */}
+      {/* Invisible triangle hover area */}
       <mesh
         geometry={geometry}
-        onPointerOver={(e) => {
-          e.stopPropagation();
-          if (!facingRef.current) return;
-          setHovered(true);
-          document.body.style.cursor = "pointer";
-        }}
-        onPointerOut={() => {
-          setHovered(false);
-          document.body.style.cursor = "auto";
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-          if (!facingRef.current) return;
-          onSelect();
-        }}
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
+        onClick={handleClick}
       >
         <meshBasicMaterial
-          color="#ffffff"
+          color={isLight ? "#000000" : "#ffffff"}
           transparent
           opacity={hovered ? 0.12 : 0}
           side={THREE.DoubleSide}
@@ -278,28 +293,38 @@ function Face({
         />
       </mesh>
 
-      {/* Icon + text – flat on face */}
       <group position={centroid} quaternion={quaternion}>
-        {/* Icon */}
-        <mesh position={[0, 0.04, 0.02]} raycast={() => {}}>
+        {/* Icon – also clickable */}
+        <mesh
+          position={[0, 0.04, 0.02]}
+          onPointerOver={handlePointerOver}
+          onPointerOut={handlePointerOut}
+          onClick={handleClick}
+        >
           <planeGeometry args={[0.4, 0.4]} />
           <meshBasicMaterial
             ref={iconMatRef}
             map={iconTex}
             transparent
-            color={COLOR_DIM}
+            color={colorDim}
             side={THREE.DoubleSide}
             depthWrite={false}
           />
         </mesh>
-        {/* Text label below icon */}
-        <mesh position={[0, -0.24, 0.02]} raycast={() => {}}>
+        {/* Text label – also clickable */}
+        <mesh
+          position={[0, -0.24, 0.02]}
+          onPointerOver={handlePointerOver}
+          onPointerOut={handlePointerOut}
+          onClick={handleClick}
+        >
           <planeGeometry args={[0.65, 0.12]} />
           <meshBasicMaterial
             ref={textMatRef}
             map={textTex}
             transparent
-            opacity={0.5}
+            color={colorBright}
+            opacity={isLight ? 0.7 : 0.5}
             side={THREE.DoubleSide}
             depthWrite={false}
           />
@@ -336,7 +361,7 @@ function DepthFaces() {
 
 /* ── Edges ── */
 
-function DashedEdges() {
+function DashedEdges({ isLight }: { isLight: boolean }) {
   const ref = useRef<THREE.LineSegments>(null);
 
   const geometry = useMemo(() => {
@@ -357,9 +382,9 @@ function DashedEdges() {
   return (
     <lineSegments ref={ref} geometry={geometry} renderOrder={1}>
       <lineDashedMaterial
-        color="#a1a1aa"
+        color={isLight ? "#3f3f46" : "#a1a1aa"}
         transparent
-        opacity={0.35}
+        opacity={isLight ? 0.5 : 0.35}
         dashSize={0.1}
         gapSize={0.08}
         depthTest={false}
@@ -369,7 +394,7 @@ function DashedEdges() {
   );
 }
 
-function SolidEdge({ a, b }: { a: number; b: number }) {
+function SolidEdge({ a, b, color }: { a: number; b: number; color: string }) {
   const ref = useRef<THREE.Object3D>(null);
   useEffect(() => {
     if (ref.current) ref.current.renderOrder = 2;
@@ -378,29 +403,30 @@ function SolidEdge({ a, b }: { a: number; b: number }) {
     <Line
       ref={ref as React.RefObject<never>}
       points={[vertices[a], vertices[b]]}
-      color="#d4d4d8"
+      color={color}
       lineWidth={3.5}
     />
   );
 }
 
-function SolidEdges() {
+function SolidEdges({ isLight }: { isLight: boolean }) {
+  const color = isLight ? "#27272a" : "#d4d4d8";
   return (
     <>
       {edgePairs.map(([a, b], i) => (
-        <SolidEdge key={i} a={a} b={b} />
+        <SolidEdge key={i} a={a} b={b} color={color} />
       ))}
     </>
   );
 }
 
-function VertexDots() {
+function VertexDots({ isLight }: { isLight: boolean }) {
   return (
     <>
       {vertices.map((v, i) => (
         <mesh key={i} position={v} renderOrder={3}>
           <sphereGeometry args={[0.05, 10, 10]} />
-          <meshBasicMaterial color="#d4d4d8" />
+          <meshBasicMaterial color={isLight ? "#27272a" : "#d4d4d8"} />
         </mesh>
       ))}
     </>
@@ -425,6 +451,7 @@ const starVert = /* glsl */ `
 
 const starFrag = /* glsl */ `
   uniform float uTime;
+  uniform float uIsLight;
   varying float vPhase;
   void main() {
     float d = length(gl_PointCoord - vec2(0.5));
@@ -432,12 +459,14 @@ const starFrag = /* glsl */ `
     float core = smoothstep(0.5, 0.05, d);
     float glow = smoothstep(0.5, 0.2, d);
     float twinkle = 0.2 + 0.8 * sin(uTime * (2.0 + vPhase * 5.0) + vPhase * 6.283);
-    vec3 col = mix(vec3(0.55, 0.7, 1.0), vec3(0.9, 0.93, 1.0), core);
+    vec3 darkCol = mix(vec3(0.55, 0.7, 1.0), vec3(0.9, 0.93, 1.0), core);
+    vec3 lightCol = mix(vec3(0.15, 0.25, 0.5), vec3(0.3, 0.35, 0.55), core);
+    vec3 col = mix(darkCol, lightCol, uIsLight);
     gl_FragColor = vec4(col, glow * twinkle);
   }
 `;
 
-function Starfield() {
+function Starfield({ isLight }: { isLight: boolean }) {
   const matRef = useRef<THREE.ShaderMaterial>(null);
   const count = 800;
 
@@ -459,7 +488,10 @@ function Starfield() {
   }, []);
 
   useFrame((state) => {
-    if (matRef.current) matRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+    if (matRef.current) {
+      matRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+      matRef.current.uniforms.uIsLight.value = isLight ? 1.0 : 0.0;
+    }
   });
 
   return (
@@ -473,7 +505,7 @@ function Starfield() {
         ref={matRef}
         transparent
         depthWrite={false}
-        uniforms={{ uTime: { value: 0 } }}
+        uniforms={{ uTime: { value: 0 }, uIsLight: { value: 0 } }}
         vertexShader={starVert}
         fragmentShader={starFrag}
       />
@@ -486,9 +518,11 @@ function Starfield() {
 function SceneContent({
   onSelect,
   controlsRef,
+  isLight,
 }: {
   onSelect: (id: string) => void;
   controlsRef: React.RefObject<OrbitControlsImpl | null>;
+  isLight: boolean;
 }) {
   return (
     <>
@@ -496,8 +530,8 @@ function SceneContent({
       <pointLight position={[5, 5, 5]} intensity={0.4} />
 
       <DepthFaces />
-      <DashedEdges />
-      <SolidEdges />
+      <DashedEdges isLight={isLight} />
+      <SolidEdges isLight={isLight} />
 
       {faceConfig.map((face) => (
         <Face
@@ -506,11 +540,12 @@ function SceneContent({
           label={face.label}
           iconType={face.icon}
           onSelect={() => onSelect(face.id)}
+          isLight={isLight}
         />
       ))}
 
-      <VertexDots />
-      <Starfield />
+      <VertexDots isLight={isLight} />
+      <Starfield isLight={isLight} />
 
       <OrbitControls
         ref={controlsRef}
@@ -527,8 +562,10 @@ function SceneContent({
 
 export default function TetrahedronScene({
   onSelect,
+  isLight,
 }: {
   onSelect: (id: string) => void;
+  isLight: boolean;
 }) {
   const controlsRef = useRef<OrbitControlsImpl | null>(null);
   const handleReset = useCallback(() => {
@@ -543,7 +580,7 @@ export default function TetrahedronScene({
       style={{ background: "transparent" }}
       onPointerMissed={handleReset}
     >
-      <SceneContent onSelect={onSelect} controlsRef={controlsRef} />
+      <SceneContent onSelect={onSelect} controlsRef={controlsRef} isLight={isLight} />
     </Canvas>
   );
 }
