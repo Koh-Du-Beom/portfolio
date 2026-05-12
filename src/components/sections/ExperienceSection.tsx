@@ -40,12 +40,11 @@ export default function ExperienceSection() {
           Experience
         </motion.h2>
 
-        {/* Horizontal timeline */}
-        <div className="relative mt-12">
-          {/* Horizontal line with gradient toward current */}
+        {/* Desktop: Horizontal timeline */}
+        <div className="relative mt-12 hidden md:block">
           <div className="absolute top-[1.125rem] left-0 right-0 h-px bg-gradient-to-r from-zinc-700 to-blue-400/60" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-4 gap-6">
             {experiences.map((item, i) => (
               <motion.div
                 key={item.period}
@@ -55,7 +54,6 @@ export default function ExperienceSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                {/* Dot on the line */}
                 <div className={`absolute top-[0.55rem] left-1/2 -translate-x-1/2 rounded-full border-2 border-blue-400 bg-zinc-950 ${item.current ? "h-4 w-4 shadow-[0_0_8px_rgba(96,165,250,0.6)]" : "h-3.5 w-3.5"}`} />
 
                 <div className="text-center">
@@ -71,6 +69,38 @@ export default function ExperienceSection() {
                     {item.period}
                   </time>
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile: Vertical timeline (newest first) */}
+        <div className="relative mt-12 md:hidden">
+          <div className="absolute top-0 bottom-0 left-[0.4375rem] w-px bg-gradient-to-b from-blue-400/60 to-zinc-700" />
+
+          <div className="flex flex-col gap-8">
+            {[...experiences].reverse().map((item, i) => (
+              <motion.div
+                key={item.period}
+                className="relative pl-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className={`absolute top-1 left-0 rounded-full border-2 border-blue-400 bg-zinc-950 ${item.current ? "h-4 w-4 shadow-[0_0_8px_rgba(96,165,250,0.6)]" : "h-3.5 w-3.5"}`} />
+
+                <h3 className={`text-sm font-semibold leading-snug ${item.current ? "text-blue-400" : "text-zinc-200"}`}>
+                  {item.title}
+                </h3>
+                {item.subtitle && (
+                  <p className="mt-1 text-xs text-zinc-400 leading-snug">
+                    {item.subtitle}
+                  </p>
+                )}
+                <time className="mt-1 block text-xs font-mono text-zinc-500">
+                  {item.period}
+                </time>
               </motion.div>
             ))}
           </div>
