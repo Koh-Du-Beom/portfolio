@@ -40,7 +40,7 @@ export default function ProjectsSection() {
                 {project.title}
               </h3>
               <p className="mt-1 text-sm text-zinc-500">{project.period}</p>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-400 line-clamp-2">
+              <p className="mt-3 text-sm leading-relaxed text-zinc-300 line-clamp-2">
                 {project.description}
               </p>
 
@@ -62,13 +62,13 @@ export default function ProjectsSection() {
                 {project.stack.slice(0, 5).map((tech) => (
                   <span
                     key={tech}
-                    className="rounded-full bg-zinc-800/80 px-2 py-0.5 text-xs text-zinc-400"
+                    className="rounded-full border border-zinc-700/50 bg-zinc-800 px-2 py-0.5 text-xs text-zinc-300"
                   >
                     {tech}
                   </span>
                 ))}
                 {project.stack.length > 5 && (
-                  <span className="rounded-full bg-zinc-800/80 px-2 py-0.5 text-xs text-zinc-500">
+                  <span className="rounded-full border border-zinc-700/50 bg-zinc-800 px-2 py-0.5 text-xs text-zinc-400">
                     +{project.stack.length - 5}
                   </span>
                 )}

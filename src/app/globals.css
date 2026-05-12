@@ -56,3 +56,9 @@ canvas {
 a, button {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Korean word-break */
+* {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}

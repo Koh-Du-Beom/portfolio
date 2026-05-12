@@ -65,7 +65,7 @@ function ModalContent({ project, onClose }: { project: Project; onClose: () => v
               ))}
             </div>
 
-            <p className="mt-4 text-sm leading-relaxed text-zinc-300">
+            <p className="mt-4 text-sm leading-relaxed text-zinc-200">
               {project.description}
             </p>
 
@@ -83,10 +83,10 @@ function ModalContent({ project, onClose }: { project: Project; onClose: () => v
               </div>
             )}
 
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4 space-y-2.5">
               {project.bullets.map((bullet, i) => (
-                <li key={i} className="flex gap-2 text-sm text-zinc-300">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400" />
+                <li key={i} className="flex gap-2.5 text-sm text-zinc-200">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(96,165,250,0.5)]" />
                   {bullet}
                 </li>
               ))}

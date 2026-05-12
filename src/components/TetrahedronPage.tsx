@@ -61,6 +61,7 @@ export default function TetrahedronPage() {
   const [resizing, setResizing] = useState(false);
   const [isLight, setIsLight] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const navigatingRef = useRef<string | null>(null);
 
   const handleSelect = useCallback((id: string) => {
     if (zoomingTo) return;
@@ -70,6 +71,12 @@ export default function TetrahedronPage() {
       setZoomingTo(null);
     }, 600);
   }, [zoomingTo]);
+
+  const handleNavigate = useCallback((id: string) => {
+    if (id === activeSection) return;
+    navigatingRef.current = id;
+    setActiveSection(null);
+  }, [activeSection]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -88,6 +95,19 @@ export default function TetrahedronPage() {
       overlayRef.current.scrollTo(0, 0);
     }
     if (!activeSection) {
+      const navTarget = navigatingRef.current;
+      navigatingRef.current = null;
+
+      if (navTarget) {
+        // Section-to-section: brief tetrahedron flash, then zoom into next
+        window.dispatchEvent(new Event("resize"));
+        const timer = setTimeout(() => {
+          handleSelect(navTarget);
+        }, 500);
+        return () => clearTimeout(timer);
+      }
+
+      // Normal close: show loading overlay
       setResizing(true);
       const timer = setTimeout(() => {
         window.dispatchEvent(new Event("resize"));
@@ -95,7 +115,7 @@ export default function TetrahedronPage() {
       }, 750);
       return () => clearTimeout(timer);
     }
-  }, [activeSection]);
+  }, [activeSection, handleSelect]);
 
   const activeConfig = sectionConfig.find((s) => s.id === activeSection);
 
@@ -178,7 +198,7 @@ export default function TetrahedronPage() {
                   {sectionConfig.map((s) => (
                     <button
                       key={s.id}
-                      onClick={() => setActiveSection(s.id)}
+                      onClick={() => handleNavigate(s.id)}
                       className={`cursor-pointer rounded-md px-2 py-1.5 text-xs font-medium transition-colors md:px-3 ${
                         s.id === activeSection
                           ? "bg-zinc-800 text-zinc-100"
