@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import AboutSection from "@/components/sections/AboutSection";
@@ -57,9 +57,19 @@ function applyTheme(light: boolean) {
 
 export default function TetrahedronPage() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [zoomingTo, setZoomingTo] = useState<string | null>(null);
   const [resizing, setResizing] = useState(false);
   const [isLight, setIsLight] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+
+  const handleSelect = useCallback((id: string) => {
+    if (zoomingTo) return;
+    setZoomingTo(id);
+    setTimeout(() => {
+      setActiveSection(id);
+      setZoomingTo(null);
+    }, 600);
+  }, [zoomingTo]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -93,14 +103,16 @@ export default function TetrahedronPage() {
     <>
       {/* Tetrahedron Hero */}
       <div
-        className={`fixed inset-0 z-0 flex items-center justify-center transition-all duration-700 ${
-          activeSection
-            ? "opacity-10 scale-75 md:scale-75 blur-md pointer-events-none"
-            : ""
+        className={`fixed inset-0 z-0 flex items-center justify-center transition-all ${
+          zoomingTo
+            ? "scale-[3] blur-2xl opacity-0 duration-600 ease-in pointer-events-none"
+            : activeSection
+              ? "opacity-10 scale-75 blur-md duration-700 pointer-events-none"
+              : "duration-700"
         }`}
       >
         <div className="absolute inset-0">
-          <TetrahedronScene onSelect={setActiveSection} isLight={isLight} />
+          <TetrahedronScene onSelect={handleSelect} isLight={isLight} />
         </div>
 
         {/* Resize loading overlay */}
@@ -135,10 +147,10 @@ export default function TetrahedronPage() {
             ref={overlayRef}
             className="fixed inset-0 z-30 overflow-y-auto backdrop-blur-xl"
             style={{ backgroundColor: "var(--cm-overlay)" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
           >
             {/* Overlay Navigation */}
             <div
