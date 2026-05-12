@@ -74,8 +74,7 @@ export default function TetrahedronPage() {
 
   const handleNavigate = useCallback((id: string) => {
     if (id === activeSection) return;
-    navigatingRef.current = id;
-    setActiveSection(null);
+    setActiveSection(id);
   }, [activeSection]);
 
   useEffect(() => {
@@ -180,19 +179,25 @@ export default function TetrahedronPage() {
               <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 md:px-6">
                 <button
                   onClick={() => setActiveSection(null)}
-                  className="flex shrink-0 cursor-pointer items-center gap-1 text-sm text-zinc-400 hover:text-zinc-100 transition-colors md:gap-2"
+                  className="flex shrink-0 cursor-pointer items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors group"
                 >
                   <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 100 100"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth="2"
+                    strokeWidth="3"
+                    strokeLinejoin="round"
+                    className="transition-transform group-hover:scale-110 group-hover:rotate-[30deg]"
                   >
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                    {/* outer triangle */}
+                    <polygon points="50,10 10,80 90,80" />
+                    {/* inner edges to center */}
+                    <line x1="50" y1="10" x2="50" y2="55" />
+                    <line x1="10" y1="80" x2="50" y2="55" />
+                    <line x1="90" y1="80" x2="50" y2="55" />
                   </svg>
-                  <span className="hidden sm:inline">돌아가기</span>
                 </button>
                 <nav className="flex gap-0.5 md:gap-1">
                   {sectionConfig.map((s) => (
