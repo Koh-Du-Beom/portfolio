@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "고두범 | 풀스택 개발자 포트폴리오",
     description:
       "프론트엔드 중심 풀스택 개발자. React, Three.js, Spring Boot, 클라우드 인프라까지.",
-    url: "https://dubbeom.dev",
+    url: "https://portfolio-ten-mu-8he06n7glf.vercel.app",
     siteName: "고두범 포트폴리오",
     locale: "ko_KR",
     type: "website",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description:
       "프론트엔드 중심 풀스택 개발자. React, Three.js, Spring Boot, 클라우드 인프라까지.",
   },
-  metadataBase: new URL("https://dubbeom.dev"),
+  metadataBase: new URL("https://portfolio-ten-mu-8he06n7glf.vercel.app"),
 };
 
 export default function RootLayout({
@@ -45,6 +45,7 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-site-verification" content="V5mTC3cECaoXyCX9jHYs6WprRHopIxRMasZ8Lh80dXQ" />
       </head>
       <body className="bg-zinc-950 text-zinc-100 overflow-x-hidden">{children}</body>
     </html>

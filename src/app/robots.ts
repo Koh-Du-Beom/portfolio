@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://dubbeom.dev/sitemap.xml",
+    sitemap: "https://portfolio-ten-mu-8he06n7glf.vercel.app/sitemap.xml",
   };
 }
