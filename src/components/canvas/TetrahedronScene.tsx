@@ -551,8 +551,10 @@ function SceneContent({
         ref={controlsRef}
         autoRotate
         autoRotateSpeed={0.4}
-        enableZoom={false}
+        enableZoom={true}
         enablePan={false}
+        minDistance={3}
+        maxDistance={8}
         minPolarAngle={Math.PI * 0.2}
         maxPolarAngle={Math.PI * 0.8}
       />
@@ -572,10 +574,12 @@ export default function TetrahedronScene({
     controlsRef.current?.reset();
   }, []);
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
   return (
     <Canvas
-      camera={{ position: [0, 0.5, 4.2], fov: 50 }}
-      dpr={typeof window !== "undefined" && window.innerWidth < 768 ? [1, 1] : [1, 1.5]}
+      camera={{ position: [0, 0.5, isMobile ? 5.4 : 4.2], fov: 50 }}
+      dpr={isMobile ? [1, 1] : [1, 1.5]}
       gl={{ antialias: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
       onPointerMissed={handleReset}

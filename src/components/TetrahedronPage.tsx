@@ -145,10 +145,10 @@ export default function TetrahedronPage() {
               className="sticky top-0 z-40 border-b border-zinc-800/50 backdrop-blur-md"
               style={{ backgroundColor: "var(--cm-nav)" }}
             >
-              <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
+              <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 md:px-6">
                 <button
                   onClick={() => setActiveSection(null)}
-                  className="flex cursor-pointer items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
+                  className="flex shrink-0 cursor-pointer items-center gap-1 text-sm text-zinc-400 hover:text-zinc-100 transition-colors md:gap-2"
                 >
                   <svg
                     width="18"
@@ -160,14 +160,14 @@ export default function TetrahedronPage() {
                   >
                     <path d="M19 12H5M12 19l-7-7 7-7" />
                   </svg>
-                  돌아가기
+                  <span className="hidden sm:inline">돌아가기</span>
                 </button>
-                <nav className="flex gap-1">
+                <nav className="flex gap-0.5 md:gap-1">
                   {sectionConfig.map((s) => (
                     <button
                       key={s.id}
                       onClick={() => setActiveSection(s.id)}
-                      className={`cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
+                      className={`cursor-pointer rounded-md px-2 py-1.5 text-xs font-medium transition-colors md:px-3 ${
                         s.id === activeSection
                           ? "bg-zinc-800 text-zinc-100"
                           : "text-zinc-500 hover:text-zinc-300"
