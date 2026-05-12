@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 z-40 w-full transition-colors duration-300 ${
-        scrolled || menuOpen ? "bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800" : ""
+        scrolled || menuOpen ? "bg-zinc-950/80 md:backdrop-blur-md border-b border-zinc-800" : ""
       }`}
     >
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4" aria-label="주요 내비게이션">

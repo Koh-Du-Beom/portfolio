@@ -420,12 +420,13 @@ function SolidEdges({ isLight }: { isLight: boolean }) {
   );
 }
 
-function VertexDots({ isLight }: { isLight: boolean }) {
+function VertexDots({ isLight, isMobile }: { isLight: boolean; isMobile: boolean }) {
+  const segments = isMobile ? 6 : 10;
   return (
     <>
       {vertices.map((v, i) => (
         <mesh key={i} position={v} renderOrder={3}>
-          <sphereGeometry args={[0.05, 10, 10]} />
+          <sphereGeometry args={[0.05, segments, segments]} />
           <meshBasicMaterial color={isLight ? "#27272a" : "#d4d4d8"} />
         </mesh>
       ))}
@@ -449,6 +450,15 @@ const starVert = /* glsl */ `
   }
 `;
 
+const starVertSimple = /* glsl */ `
+  attribute float aSize;
+  void main() {
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    gl_PointSize = aSize * (40.0 / -mv.z);
+    gl_Position = projectionMatrix * mv;
+  }
+`;
+
 const starFrag = /* glsl */ `
   uniform float uTime;
   uniform float uIsLight;
@@ -466,9 +476,20 @@ const starFrag = /* glsl */ `
   }
 `;
 
-function Starfield({ isLight }: { isLight: boolean }) {
+const starFragSimple = /* glsl */ `
+  uniform float uIsLight;
+  void main() {
+    float d = length(gl_PointCoord - vec2(0.5));
+    if (d > 0.5) discard;
+    float glow = smoothstep(0.5, 0.15, d);
+    vec3 col = mix(vec3(0.7, 0.8, 1.0), vec3(0.2, 0.3, 0.5), uIsLight);
+    gl_FragColor = vec4(col, glow * 0.6);
+  }
+`;
+
+function Starfield({ isLight, isMobile }: { isLight: boolean; isMobile: boolean }) {
   const matRef = useRef<THREE.ShaderMaterial>(null);
-  const count = 800;
+  const count = isMobile ? 250 : 800;
 
   const { positions, sizes, phases } = useMemo(() => {
     const pos = new Float32Array(count * 3);
@@ -489,7 +510,9 @@ function Starfield({ isLight }: { isLight: boolean }) {
 
   useFrame((state) => {
     if (matRef.current) {
-      matRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+      if (!isMobile) {
+        matRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+      }
       matRef.current.uniforms.uIsLight.value = isLight ? 1.0 : 0.0;
     }
   });
@@ -499,15 +522,18 @@ function Starfield({ isLight }: { isLight: boolean }) {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
         <bufferAttribute attach="attributes-aSize" args={[sizes, 1]} />
-        <bufferAttribute attach="attributes-aPhase" args={[phases, 1]} />
+        {!isMobile && <bufferAttribute attach="attributes-aPhase" args={[phases, 1]} />}
       </bufferGeometry>
       <shaderMaterial
         ref={matRef}
         transparent
         depthWrite={false}
-        uniforms={{ uTime: { value: 0 }, uIsLight: { value: 0 } }}
-        vertexShader={starVert}
-        fragmentShader={starFrag}
+        uniforms={isMobile
+          ? { uIsLight: { value: 0 } }
+          : { uTime: { value: 0 }, uIsLight: { value: 0 } }
+        }
+        vertexShader={isMobile ? starVertSimple : starVert}
+        fragmentShader={isMobile ? starFragSimple : starFrag}
       />
     </points>
   );
@@ -519,15 +545,17 @@ function SceneContent({
   onSelect,
   controlsRef,
   isLight,
+  isMobile,
 }: {
   onSelect: (id: string) => void;
   controlsRef: React.RefObject<OrbitControlsImpl | null>;
   isLight: boolean;
+  isMobile: boolean;
 }) {
   return (
     <>
       <ambientLight intensity={0.6} />
-      <pointLight position={[5, 5, 5]} intensity={0.4} />
+      {!isMobile && <pointLight position={[5, 5, 5]} intensity={0.4} />}
 
       <DepthFaces />
       <DashedEdges isLight={isLight} />
@@ -544,8 +572,8 @@ function SceneContent({
         />
       ))}
 
-      <VertexDots isLight={isLight} />
-      <Starfield isLight={isLight} />
+      <VertexDots isLight={isLight} isMobile={isMobile} />
+      <Starfield isLight={isLight} isMobile={isMobile} />
 
       <OrbitControls
         ref={controlsRef}
@@ -580,11 +608,11 @@ export default function TetrahedronScene({
     <Canvas
       camera={{ position: [0, 0.5, isMobile ? 5.4 : 4.2], fov: 50 }}
       dpr={isMobile ? [1, 1] : [1, 1.5]}
-      gl={{ antialias: true, powerPreference: "high-performance" }}
+      gl={{ antialias: !isMobile, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
       onPointerMissed={handleReset}
     >
-      <SceneContent onSelect={onSelect} controlsRef={controlsRef} isLight={isLight} />
+      <SceneContent onSelect={onSelect} controlsRef={controlsRef} isLight={isLight} isMobile={isMobile} />
     </Canvas>
   );
 }

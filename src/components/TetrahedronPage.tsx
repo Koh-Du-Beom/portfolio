@@ -124,9 +124,9 @@ export default function TetrahedronPage() {
       <div
         className={`fixed inset-0 z-0 flex items-center justify-center transition-all ${
           zoomingTo
-            ? "scale-[3] blur-2xl opacity-0 duration-600 ease-in pointer-events-none"
+            ? "scale-[3] md:blur-2xl opacity-0 duration-600 ease-in pointer-events-none"
             : activeSection
-              ? "opacity-10 scale-75 blur-md duration-700 pointer-events-none"
+              ? "opacity-10 scale-75 md:blur-md duration-700 pointer-events-none"
               : "duration-700"
         }`}
       >
@@ -164,7 +164,7 @@ export default function TetrahedronPage() {
         {activeSection && activeConfig && (
           <motion.div
             ref={overlayRef}
-            className="fixed inset-0 z-30 overflow-y-auto backdrop-blur-xl"
+            className="fixed inset-0 z-30 overflow-y-auto md:backdrop-blur-xl"
             style={{ backgroundColor: "var(--cm-overlay)" }}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -173,7 +173,7 @@ export default function TetrahedronPage() {
           >
             {/* Overlay Navigation */}
             <div
-              className="sticky top-0 z-40 border-b border-zinc-800/50 backdrop-blur-md"
+              className="sticky top-0 z-40 border-b border-zinc-800/50 md:backdrop-blur-md"
               style={{ backgroundColor: "var(--cm-nav)" }}
             >
               <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 md:px-6">
@@ -236,7 +236,7 @@ export default function TetrahedronPage() {
       {/* Dark / Light Toggle */}
       <button
         onClick={() => setIsLight((p) => !p)}
-        className="fixed bottom-6 right-6 z-50 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-zinc-800 shadow-lg backdrop-blur-md transition-transform hover:scale-110"
+        className="fixed bottom-6 right-6 z-50 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-zinc-800 shadow-lg md:backdrop-blur-md transition-transform hover:scale-110"
         style={{ backgroundColor: "var(--cm-nav)" }}
         aria-label={isLight ? "다크 모드로 전환" : "라이트 모드로 전환"}
       >

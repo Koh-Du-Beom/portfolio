@@ -14,7 +14,7 @@ const SkillBadge = memo(function SkillBadge({
 }) {
   return (
     <span
-      className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm backdrop-blur-sm ${colorClass}`}
+      className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm md:backdrop-blur-sm ${colorClass}`}
     >
       {skillIcons[skill.name] && (
         <span className="flex shrink-0">{skillIcons[skill.name]}</span>

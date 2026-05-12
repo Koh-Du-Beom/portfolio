@@ -56,7 +56,7 @@ export default function PointCloudHero() {
         gl={{ antialias: false, powerPreference: "high-performance" }}
       >
         <ambientLight intensity={0.5} />
-        <ParticleField count={isMobile ? 1500 : 3000} />
+        <ParticleField count={isMobile ? 600 : 3000} />
       </Canvas>
     </div>
   );
