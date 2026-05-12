@@ -42,11 +42,13 @@ const awards = [
     period: "2024",
     title: "산학실전캡스톤 최우수상",
     detail: "주최: 전북대학교 SW중심대학",
+    link: "https://swuniv.jbnu.ac.kr/festival/jbnusw?gc=893BAOF&do=view&festival_id=KJzARhxzLIL678da2f1&syear=2024&page=2&content_id=farvGV2-9K7678dddb6",
   },
 ];
 
 const certifications = [
   { title: "정보처리기사", period: "2024.12 취득" },
+  { title: "TOPCIT 495점", period: "2024.10 응시" },
   { title: "SQLD", period: "2024.09 취득" },
 ];
 
@@ -179,6 +181,16 @@ export default function AboutSection() {
                   <p className="mt-0.5 text-sm text-zinc-400">
                     {award.detail}
                   </p>
+                  {award.link && (
+                    <a
+                      href={award.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-block text-xs text-blue-400 hover:text-blue-300 underline underline-offset-2"
+                    >
+                      수상 증빙 보기
+                    </a>
+                  )}
                 </div>
               ))}
             </div>

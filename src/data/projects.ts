@@ -179,8 +179,9 @@ export const projects: Project[] = [
       "Nodemailer",
     ],
     description:
-      "회사 공식 홈페이지 단독 설계/개발. 6개 페이지.",
+      "회사 공식 홈페이지 단독 설계/개발. dpre.co.kr 도메인으로 Vercel 배포. 6개 페이지.",
     bullets: [
+      "dpre.co.kr 커스텀 도메인 연결 및 Vercel 배포/운영",
       "MapLibre GL + GeoJSON 전국 촬영현황 지도 시각화",
       "Zustand 기반 한/영 다국어 전환",
       "Nodemailer를 통한 문의사항 이메일 자동 전달",
