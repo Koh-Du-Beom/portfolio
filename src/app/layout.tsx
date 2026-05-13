@@ -1,7 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@fontsource/pretendard/400.css";
 import "@fontsource/pretendard/700.css";
 import "./globals.css";
+
+// Viewport 설정 (Next.js 14+ 권장 방식)
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "고두범 | 풀스택 개발자 포트폴리오",
@@ -34,6 +40,10 @@ export const metadata: Metadata = {
       "프론트엔드 중심 풀스택 개발자. React, Three.js, Spring Boot, 클라우드 인프라까지.",
   },
   metadataBase: new URL("https://portfolio-ten-mu-8he06n7glf.vercel.app"),
+
+  verification: {
+    google: "V5mTC3cECaoXyCX9jHYs6WprRHopIxRMasZ8Lh80dXQ",
+  },
 };
 
 export default function RootLayout({
@@ -43,11 +53,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="google-site-verification" content="V5mTC3cECaoXyCX9jHYs6WprRHopIxRMasZ8Lh80dXQ" />
-      </head>
-      <body className="bg-zinc-950 text-zinc-100 overflow-x-hidden">{children}</body>
+      {/* <head> 태그를 수동으로 넣지 않아도 Next.js가 자동으로 생성해 줍니다. */}
+      <body className="bg-zinc-950 text-zinc-100 overflow-x-hidden">
+        {children}
+      </body>
     </html>
   );
 }
