@@ -66,7 +66,6 @@ export const projects: Project[] = [
       "JWT 인증 + 역할 기반 라우팅 + 시설물 단위 권한 관리",
     ],
     metrics: [
-      { label: "번들 감소", value: "92%" },
       { label: "기여도", value: "98%" },
     ],
   },
