@@ -1,12 +1,19 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: "https://portfolio-ten-mu-8he06n7glf.vercel.app",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
+  const pages = [
+    { path: "", priority: 1 },
+    { path: "/about", priority: 0.8 },
+    { path: "/experience", priority: 0.8 },
+    { path: "/projects", priority: 0.9 },
+    { path: "/skills", priority: 0.7 },
   ];
+
+  return pages.map(({ path, priority }) => ({
+    url: `${SITE_URL}${path}`,
+    lastModified: "2026-07-15",
+    changeFrequency: "monthly" as const,
+    priority,
+  }));
 }

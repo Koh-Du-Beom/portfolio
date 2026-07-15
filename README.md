@@ -2,7 +2,7 @@
 
 프론트엔드 중심 풀스택 개발자 고두범의 개인 포트폴리오입니다. 경력과 프로젝트, 기술 역량을 하나의 인터랙티브 페이지에서 소개합니다.
 
-- 배포 주소: [portfolio-ten-mu-8he06n7glf.vercel.app](https://portfolio-ten-mu-8he06n7glf.vercel.app)
+- 배포 주소: [dubeom.com](https://dubeom.com)
 - GitHub: [Koh-Du-Beom](https://github.com/Koh-Du-Beom)
 
 ## 주요 구성
