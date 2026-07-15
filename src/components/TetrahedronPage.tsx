@@ -154,10 +154,24 @@ export default function TetrahedronPage() {
                   transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
                 />
               </div>
+              <motion.p
+                className="text-[10px] tracking-wide text-zinc-500 md:text-xs"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.15, ease: "easeOut" }}
+              >
+                Built with Next.js &amp; Three.js
+              </motion.p>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
+
+      {!activeSection && !resizing && (
+        <p className="pointer-events-none fixed bottom-6 left-5 z-20 text-[10px] tracking-wide text-zinc-500 md:left-6 md:text-xs">
+          Built with Next.js &amp; Three.js
+        </p>
+      )}
 
       {/* Section Overlay */}
       <AnimatePresence>
