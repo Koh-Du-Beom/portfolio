@@ -59,7 +59,6 @@ export const projects: Project[] = [
     bullets: [
       "JavaScript → TypeScript 전면 마이그레이션",
       "Feature-Sliced Design(FSD) 아키텍처 전면 리팩토링 — feature간 cross-import 제거, 의존성 방향 단방향 강제",
-      "React.lazy + Vite manualChunks 코드 스플리팅 — 초기 번들 2,293KB → 190KB (92% 감소)",
       "대용량 3D 점군 파일 업로드 안정화 및 분석완료 이메일 API 연동으로 장기 분석 결과 알림",
       "VWorld GIS 지도 위 시설물 마커/검색/좌표 시각화",
       "React Query 패턴 전환으로 서버/클라이언트 상태 분리",
@@ -129,12 +128,11 @@ export const projects: Project[] = [
       "GeoServer",
     ],
     description:
-      "오픈소스 WebGL 점군 뷰어를 비탈면 도메인에 맞게 대규모 커스터마이징.",
+      "오픈소스 WebGL 포인트 클라우드 뷰어를 비탈면 도메인에 맞게 대규모 커스터마이징.",
     bullets: [
       "법정 보고서 양식 구현 — 3D 측정값 자동 반영, 점수 산정, PDF 변환",
       "이미지 어노테이션 — 좌표 기반 3D 배치, DEM 지표면/지형물 구분",
-      "측정 도구 고도화 — Distance/Profile/Clipping 커스터마이징, CSV 오버레이, DXF 내보내기",
-      "GeoServer WMS/WFS + Proj4 좌표 변환, DEM Z축 정합",
+      "측정 도구 고도화 — Distance/Profile/Clipping 커스터마이징, CSV 오버레이",
     ],
     metrics: [{ label: "기여도", value: "80%" }],
   },
@@ -213,7 +211,10 @@ export const projects: Project[] = [
       "react-window 가상 스크롤로 20,000+ 종목 렌더링 최적화",
       "Next.js API Route + JWT + bcrypt 풀스택 인증",
     ],
-    metrics: [],
+    metrics: [
+      { label: "프론트엔드 기여도", value: "100%" },
+      { label: "백엔드 기여", value: "JWT 인증·API 구현" },
+    ],
   },
   {
     id: "tilon-internship",

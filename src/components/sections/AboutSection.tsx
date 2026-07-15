@@ -33,7 +33,7 @@ const career = [
   {
     period: "2026.07.14 ~ 현재",
     company: "SK AI Leader Academy 4기",
-    role: "AI 역량을 확장하고, 학술적이고 건전한 인적 네트워크를 넓혀가는 중",
+    role: "AI 역량 강화 및 동료들과의 학습·협업 경험 확장",
   },
   {
     period: "2024.12 ~ 2026.06.30",

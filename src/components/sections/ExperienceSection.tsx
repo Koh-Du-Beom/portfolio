@@ -26,7 +26,7 @@ const experiences = [
   {
     title: "SK AI Leader Academy 4기",
     period: "2026.07.14 ~ 현재",
-    subtitle: "AI 역량 확장과 학술적·건전한 인적 네트워크 형성",
+    subtitle: "AI 역량 확장",
     current: true,
   },
 ];
