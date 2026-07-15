@@ -4,24 +4,29 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
-    title: "산학실전캡스톤 — [Tilon]",
+    title: "[산학실전캡스톤] Tilon",
     subtitle: "WebRTC 기반 원격 제어 기법 연구",
     period: "2024.03 ~ 2024.06",
   },
   {
-    title: "하기 계절제 현장실습(인턴십)",
-    subtitle: "[Tilon]",
+    title: "[하계 계절제 현장실습] Tilon",
+    subtitle: "VDI 인프라 운영 및 WebRTC 기술 연구",
     period: "2024.06.24 ~ 2024.08.19",
   },
   {
-    title: "산학실전캡스톤 — [Koscom]",
+    title: "[산학실전캡스톤] Koscom",
     subtitle: "데이터 기반 주식투자 포트폴리오 개발",
     period: "2024.09 ~ 2024.12",
   },
   {
     title: "주식회사 디프리",
-    period: "2024.12 ~ 현재",
+    period: "2024.12 ~ 2026.06.30",
     subtitle: "소프트웨어 엔지니어",
+  },
+  {
+    title: "SK AI Leader Academy 4기",
+    period: "2026.07.14 ~ 현재",
+    subtitle: "AI 역량 확장과 학술적·건전한 인적 네트워크 형성",
     current: true,
   },
 ];
@@ -29,7 +34,7 @@ const experiences = [
 export default function ExperienceSection() {
   return (
     <section id="experience" className="py-24 md:py-32" aria-labelledby="experience-heading">
-      <div className="mx-auto max-w-5xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <motion.h2
           id="experience-heading"
           className="text-3xl font-bold text-zinc-100"
@@ -44,7 +49,7 @@ export default function ExperienceSection() {
         <div className="relative mt-12 hidden md:block">
           <div className="absolute top-[1.125rem] left-0 right-0 h-px bg-gradient-to-r from-zinc-700 to-blue-400/60" />
 
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-5 gap-4">
             {experiences.map((item, i) => (
               <motion.div
                 key={item.period}

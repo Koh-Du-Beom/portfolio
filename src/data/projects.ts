@@ -17,7 +17,7 @@ export const projects: Project[] = [
     order: 1,
     title: "[주식회사 디프리] 급경사지안전협회 업무 시스템 개발",
     subtitle: "전자결재 · ERP · PMS 프론트엔드 단독 개발",
-    period: "2026.01 ~ 현재",
+    period: "2026.01 ~ 2026.06",
     stack: [
       "React",
       "TypeScript",
@@ -43,7 +43,7 @@ export const projects: Project[] = [
     order: 2,
     title: "[주식회사 디프리] 비탈면 유지관리 플랫폼",
     subtitle: "dpre.kr · 프론트엔드 단독 개발",
-    period: "2024.12 ~ 현재",
+    period: "2024.12 ~ 2026.06",
     stack: [
       "React",
       "TypeScript",
@@ -74,7 +74,7 @@ export const projects: Project[] = [
     order: 3,
     title: "[주식회사 디프리] 클라우드 인프라 / CI-CD",
     subtitle: "Docker + nginx + Cloudflare",
-    period: "2024.12 ~ 현재",
+    period: "2024.12 ~ 2026.06",
     stack: ["GitHub Actions", "Docker", "nginx", "Cloudflare", "NCP"],
     description: "전체 서비스 인프라 설계, CI/CD, 서버리스 유틸리티.",
     bullets: [
@@ -95,7 +95,7 @@ export const projects: Project[] = [
     order: 4,
     title: "[주식회사 디프리] 규제샌드박스",
     subtitle: "폐쇄망 인프라 설계/구축 전담",
-    period: "2025.09 ~ 현재",
+    period: "2025.09 ~ 2026.06",
     stack: [
       "Docker",
       "nginx",
@@ -119,7 +119,7 @@ export const projects: Project[] = [
     order: 5,
     title: "[주식회사 디프리] Potree 3D Pointcloud Viewer",
     subtitle: "오픈소스 대규모 커스터마이징",
-    period: "2024.12 ~ 현재",
+    period: "2024.12 ~ 2026.06",
     stack: [
       "JavaScript",
       "Three.js",
@@ -143,7 +143,7 @@ export const projects: Project[] = [
     order: 6,
     title: "[주식회사 디프리] 백엔드 API 서버",
     subtitle: "Spring Boot + Docker · 공동 개발 + 외주 관리",
-    period: "2024.12 ~ 현재",
+    period: "2024.12 ~ 2026.06",
     stack: [
       "Java 21",
       "Spring Boot 3.2",
@@ -168,7 +168,7 @@ export const projects: Project[] = [
     order: 7,
     title: "[주식회사 디프리] 홈페이지 개선",
     subtitle: "dpre.co.kr",
-    period: "2024.12 ~ 현재",
+    period: "2024.12 ~ 2026.06",
     stack: [
       "Next.js 15",
       "React 19",
@@ -191,7 +191,7 @@ export const projects: Project[] = [
   {
     id: "capstone",
     order: 8,
-    title: "산학실전캡스톤 — [Koscom]",
+    title: "[산학실전캡스톤] Koscom",
     subtitle: "데이터 기반 주식투자 포트폴리오 개발",
     period: "2024.09 ~ 2024.12",
     stack: [
@@ -218,8 +218,8 @@ export const projects: Project[] = [
   {
     id: "tilon-internship",
     order: 9,
-    title: "하기 계절제 현장실습(인턴십)",
-    subtitle: "[Tilon] VDI 인프라 운영 (8주)",
+    title: "[하계 계절제 현장실습] Tilon",
+    subtitle: "VDI 인프라 운영 및 WebRTC 기술 연구 (8주)",
     period: "2024.06 ~ 2024.08",
     stack: [
       "Dstation 9.0",
@@ -240,7 +240,7 @@ export const projects: Project[] = [
   {
     id: "capstone-4k-video",
     order: 10,
-    title: "산학실전캡스톤 — [Tilon]",
+    title: "[산학실전캡스톤] Tilon",
     subtitle: "WebRTC 기반 다자간 화상회의 플랫폼",
     period: "2024.03 ~ 2024.06",
     stack: [
@@ -267,7 +267,7 @@ export const timeline = [
   { date: "2024.03", label: "캡스톤 (틸론)", projectId: "capstone-4k-video" },
   { date: "2024.06", label: "틸론 현장실습", projectId: "tilon-internship" },
   { date: "2024.09", label: "캡스톤 (코스콤)", projectId: "capstone" },
-  { date: "2025.02", label: "DPRE 합류", projectId: "dpre-front" },
+  { date: "2024.12", label: "DPRE 합류", projectId: "dpre-front" },
   { date: "2025.02", label: "유지관리 플랫폼 FE", projectId: "dpre-front" },
   { date: "2025.02", label: "Potree 3D 뷰어", projectId: "potree" },
   { date: "2025.02", label: "백엔드 API", projectId: "backend" },
