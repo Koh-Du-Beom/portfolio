@@ -59,12 +59,38 @@ npm run start     # 빌드 결과 실행
 
 ### 1. 최초 설정
 
-Vercel CLI를 설치하고 계정에 로그인합니다.
+#### macOS (Homebrew)
+
+Homebrew를 사용한다면 다음 명령으로 Vercel CLI를 설치합니다.
+
+```bash
+brew install vercel-cli
+vercel --version
+vercel login
+```
+
+이미 설치되어 있다면 다음 명령으로 최신 버전으로 업데이트할 수 있습니다.
+
+```bash
+brew update
+brew upgrade vercel-cli
+```
+
+#### npm
+
+운영체제와 관계없이 npm 전역 패키지로도 설치할 수 있습니다.
 
 ```bash
 npm install --global vercel@latest
 vercel --version
 vercel login
+```
+
+Homebrew와 npm으로 Vercel CLI를 동시에 설치하면 실행 경로가 달라질 수 있으므로 한 가지 설치 방식만 사용하는 것을 권장합니다. 현재 실행되는 CLI의 위치와 버전은 다음 명령으로 확인합니다.
+
+```bash
+which vercel
+vercel --version
 ```
 
 프로젝트 루트에서 로컬 디렉터리를 기존 Vercel 프로젝트와 연결합니다.
