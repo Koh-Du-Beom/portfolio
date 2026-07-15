@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import AboutSection from "@/components/sections/AboutSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
@@ -121,13 +120,6 @@ export default function TetrahedronPage() {
 
   return (
     <>
-      <Link
-        href="/about"
-        className="fixed right-6 top-6 z-20 rounded-full border border-zinc-800 bg-zinc-950/70 px-4 py-2 text-xs text-zinc-400 backdrop-blur-md transition-colors hover:border-zinc-600 hover:text-zinc-100"
-      >
-        텍스트로 보기
-      </Link>
-
       {/* Tetrahedron Hero */}
       <div
         className={`fixed inset-0 z-0 flex items-center justify-center transition-all ${
