@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import AboutSection from "@/components/sections/AboutSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
@@ -20,6 +21,17 @@ const sectionConfig = [
   { id: "projects", label: "Projects", Component: ProjectsSection },
   { id: "skills", label: "Skills", Component: SkillsSection },
 ] as const;
+
+type SectionId = (typeof sectionConfig)[number]["id"];
+
+function isSectionId(value: string): value is SectionId {
+  return sectionConfig.some((item) => item.id === value);
+}
+
+function getSectionFromPathname(pathname: string): SectionId | null {
+  const section = pathname.split("/").filter(Boolean)[0];
+  return section && isSectionId(section) ? section : null;
+}
 
 /* ── Theme ── */
 
@@ -56,34 +68,46 @@ function applyTheme(light: boolean) {
 /* ── Component ── */
 
 export default function TetrahedronPage() {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [zoomingTo, setZoomingTo] = useState<string | null>(null);
+  const pathname = usePathname();
+  const activeSection = getSectionFromPathname(pathname);
+  const [zoomingTo, setZoomingTo] = useState<SectionId | null>(null);
   const [resizing, setResizing] = useState(false);
   const [isLight, setIsLight] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const navigatingRef = useRef<string | null>(null);
+  const navigatingRef = useRef<SectionId | null>(null);
+
+  const updateUrl = useCallback((section: SectionId | null) => {
+    const nextPath = section ? `/${section}` : "/";
+    if (window.location.pathname !== nextPath) {
+      window.history.pushState(null, "", nextPath);
+    }
+  }, []);
 
   const handleSelect = useCallback((id: string) => {
-    if (zoomingTo) return;
+    if (zoomingTo || !isSectionId(id)) return;
     setZoomingTo(id);
     setTimeout(() => {
-      setActiveSection(id);
+      updateUrl(id);
       setZoomingTo(null);
     }, 600);
-  }, [zoomingTo]);
+  }, [updateUrl, zoomingTo]);
 
-  const handleNavigate = useCallback((id: string) => {
+  const handleNavigate = useCallback((id: SectionId) => {
     if (id === activeSection) return;
-    setActiveSection(id);
-  }, [activeSection]);
+    updateUrl(id);
+  }, [activeSection, updateUrl]);
+
+  const handleClose = useCallback(() => {
+    updateUrl(null);
+  }, [updateUrl]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActiveSection(null);
+      if (e.key === "Escape" && activeSection) handleClose();
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [activeSection, handleClose]);
 
   useEffect(() => {
     applyTheme(isLight);
@@ -192,7 +216,7 @@ export default function TetrahedronPage() {
             >
               <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 md:px-6">
                 <button
-                  onClick={() => setActiveSection(null)}
+                  onClick={handleClose}
                   className="flex shrink-0 cursor-pointer items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors group"
                 >
                   <svg

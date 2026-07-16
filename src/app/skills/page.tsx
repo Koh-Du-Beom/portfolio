@@ -1,5 +1,4 @@
-import SkillsSection from "@/components/sections/SkillsSection";
-import SeoPageShell from "@/components/seo/SeoPageShell";
+import TetrahedronPage from "@/components/TetrahedronPage";
 import { createPageMetadata } from "@/lib/site";
 
 export const metadata = createPageMetadata(
@@ -9,9 +8,5 @@ export const metadata = createPageMetadata(
 );
 
 export default function SkillsPage() {
-  return (
-    <SeoPageShell>
-      <SkillsSection />
-    </SeoPageShell>
-  );
+  return <TetrahedronPage />;
 }

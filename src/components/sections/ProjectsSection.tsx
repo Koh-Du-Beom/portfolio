@@ -1,12 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense } from "react";
 import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 import { projects, type Project } from "@/data/projects";
 import ProjectModal from "@/components/ui/ProjectModal";
 
+function ProjectModalRouter() {
+  const searchParams = useSearchParams();
+  const selected = projects.find(
+    (project) => project.id === searchParams.get("project"),
+  ) ?? null;
+
+  const closeProject = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("project");
+    const query = params.toString();
+    window.history.replaceState(null, "", query ? `/projects?${query}` : "/projects");
+  };
+
+  return <ProjectModal project={selected} onClose={closeProject} />;
+}
+
 export default function ProjectsSection() {
-  const [selected, setSelected] = useState<Project | null>(null);
+  const openProject = (project: Project) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("project", project.id);
+    window.history.pushState(null, "", `/projects?${params.toString()}`);
+  };
 
   return (
     <section id="projects" className="py-24 md:py-32" aria-labelledby="projects-heading">
@@ -30,10 +51,10 @@ export default function ProjectsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              onClick={() => setSelected(project)}
+              onClick={() => openProject(project)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => e.key === "Enter" && setSelected(project)}
+              onKeyDown={(e) => e.key === "Enter" && openProject(project)}
               aria-label={`${project.title} 상세 보기`}
             >
               <h3 className="text-lg font-semibold text-zinc-100 group-hover:text-blue-400 transition-colors">
@@ -78,7 +99,9 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      <ProjectModal project={selected} onClose={() => setSelected(null)} />
+      <Suspense fallback={null}>
+        <ProjectModalRouter />
+      </Suspense>
     </section>
   );
 }
