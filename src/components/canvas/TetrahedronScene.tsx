@@ -127,6 +127,7 @@ function createIconTexture(type: string): THREE.CanvasTexture {
   const ctx = canvas.getContext("2d")!;
   drawIcon(ctx, type, size / 2, size / 2, size * 0.38);
   const tex = new THREE.CanvasTexture(canvas);
+  tex.anisotropy = 4;
   tex.needsUpdate = true;
   return tex;
 }
@@ -143,6 +144,7 @@ function createTextTexture(text: string): THREE.CanvasTexture {
   ctx.textBaseline = "middle";
   ctx.fillText(text, canvas.width / 2, canvas.height / 2);
   const tex = new THREE.CanvasTexture(canvas);
+  tex.anisotropy = 4;
   tex.needsUpdate = true;
   return tex;
 }
@@ -489,7 +491,7 @@ const starFragSimple = /* glsl */ `
 
 function Starfield({ isLight, isMobile }: { isLight: boolean; isMobile: boolean }) {
   const matRef = useRef<THREE.ShaderMaterial>(null);
-  const count = isMobile ? 250 : 800;
+  const count = isMobile ? 150 : 800;
 
   const { positions, sizes, phases } = useMemo(() => {
     const pos = new Float32Array(count * 3);
@@ -607,8 +609,8 @@ export default function TetrahedronScene({
   return (
     <Canvas
       camera={{ position: [0, 0.5, isMobile ? 5.4 : 4.2], fov: 50 }}
-      dpr={isMobile ? [1, 1] : [1, 1.5]}
-      gl={{ antialias: !isMobile, powerPreference: "high-performance" }}
+      dpr={isMobile ? 1.5 : [1, 1.5]}
+      gl={{ antialias: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
       onPointerMissed={handleReset}
     >
