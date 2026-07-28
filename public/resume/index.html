@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="프론트엔드 중심 풀스택 소프트웨어 엔지니어 고두범의 이력서" />
+    <title>고두범 - 이력서</title>
+    <style>
+      :root {
+        --ink: #18212b;
+        --body: #465568;
+        --muted: #708094;
+        --accent: #087f88;
+        --accent-dark: #005c66;
+        --accent-soft: #eef7f7;
+        --line: #dbe4e7;
+        --paper: #fff;
+      }
+
+      * { box-sizing: border-box; }
+
+      html {
+        background: #dfe5e7;
+        color: var(--ink);
+        font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 10.5px;
+        line-height: 1.55;
+        word-break: keep-all;
+      }
+
+      body { margin: 0; }
+
+      a {
+        color: inherit;
+        text-decoration-color: #bdcbd0;
+        text-underline-offset: 4px;
+      }
+
+      .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px;
+        background: rgb(24 33 43 / 92%);
+        backdrop-filter: blur(12px);
+      }
+
+      .toolbar a,
+      .toolbar button {
+        border: 1px solid rgb(255 255 255 / 25%);
+        border-radius: 999px;
+        background: transparent;
+        color: #fff;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+        padding: 7px 14px;
+      }
+
+      .toolbar .primary {
+        border-color: var(--accent);
+        background: var(--accent);
+      }
+
+      .resume {
+        width: 210mm;
+        margin: 20px auto;
+        background: var(--paper);
+        box-shadow: 0 10px 40px rgb(22 34 43 / 18%);
+      }
+
+      .page {
+        position: relative;
+        min-height: 297mm;
+        padding: 16mm 13mm 13mm;
+        background: var(--paper);
+        page-break-after: always;
+      }
+
+      .page:last-child { page-break-after: auto; }
+      .page:first-child { padding-top: 0; }
+
+      .hero {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 39mm;
+        gap: 10mm;
+        margin: 0 -13mm 9mm;
+        padding: 10mm 13mm 8mm;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(115deg, #fff 55%, #edf5f5);
+      }
+
+      .hero::before {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 1.3mm;
+        background: linear-gradient(#087f88, #47aab0);
+        content: "";
+      }
+
+      .name-row {
+        display: flex;
+        align-items: baseline;
+        gap: 13px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        letter-spacing: -1.8px;
+        line-height: 1.2;
+      }
+
+      .romanized {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .role {
+        margin: 4mm 0 3mm;
+        color: var(--accent-dark);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+      }
+
+      .summary {
+        max-width: 145mm;
+        margin: 0;
+        color: var(--body);
+        font-size: 11.5px;
+        line-height: 1.75;
+      }
+
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5mm;
+        margin-top: 5mm;
+        color: var(--muted);
+        font-size: 9px;
+      }
+
+      .photo-frame {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4mm;
+        background: rgb(185 201 204 / 28%);
+      }
+
+      .photo-frame img {
+        width: 30mm;
+        height: 40mm;
+        border: 1px solid #c7d1d4;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+
+      section + section { margin-top: 7mm; }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        margin: 0 0 4mm;
+        font-size: 11px;
+        letter-spacing: 1.6px;
+      }
+
+      .section-title::before {
+        width: 5.5mm;
+        height: 1mm;
+        border-radius: 10px;
+        background: var(--accent);
+        content: "";
+      }
+
+      .section-title::after {
+        height: 1px;
+        flex: 1;
+        background: var(--line);
+        content: "";
+      }
+
+      .entry {
+        break-inside: avoid;
+        padding-bottom: 4mm;
+      }
+
+      .entry + .entry {
+        padding-top: 4mm;
+        border-top: 1px dashed var(--line);
+      }
+
+      .entry-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 5mm;
+        align-items: baseline;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 12px;
+        letter-spacing: -.35px;
+      }
+
+      .date {
+        color: var(--muted);
+        font-size: 9px;
+        white-space: nowrap;
+      }
+
+      .lead {
+        margin: 1mm 0 2mm;
+        color: var(--body);
+        font-size: 9.5px;
+      }
+
+      .metric {
+        color: var(--accent-dark);
+        font-weight: 800;
+      }
+
+      ul {
+        margin: 1.7mm 0 0;
+        padding-left: 4.4mm;
+        color: var(--body);
+      }
+
+      li { margin: .6mm 0; }
+      li::marker { color: #78b6ba; }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5mm;
+        margin: 2mm 0 1.5mm;
+      }
+
+      .tag {
+        border: 1px solid #d5e5e6;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: #41636a;
+        font-size: 8px;
+        font-weight: 700;
+        padding: .6mm 2.2mm;
+      }
+
+      .compact .entry { padding-bottom: 3mm; }
+      .compact .entry + .entry { padding-top: 3mm; }
+
+      .skills {
+        display: grid;
+        gap: 2.6mm;
+        margin: 0;
+      }
+
+      .skill-row {
+        display: grid;
+        grid-template-columns: 28mm 1fr;
+        gap: 4mm;
+      }
+
+      .skill-row dt {
+        color: var(--ink);
+        font-weight: 800;
+      }
+
+      .skill-row dd {
+        margin: 0;
+        color: var(--body);
+      }
+
+      .credentials {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3mm 10mm;
+      }
+
+      .credential {
+        display: flex;
+        justify-content: space-between;
+        gap: 4mm;
+        padding-bottom: 2.5mm;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .credential strong { font-size: 10px; }
+      .credential span { color: var(--muted); white-space: nowrap; }
+
+      @media (max-width: 840px) {
+        html { background: #fff; }
+        .resume { width: 100%; margin: 0; box-shadow: none; }
+        .page { min-height: 0; padding: 34px 24px; }
+        .page:first-child { padding-top: 0; }
+        .hero {
+          grid-template-columns: 1fr;
+          margin-right: -24px;
+          margin-left: -24px;
+          padding: 32px 24px 28px;
+        }
+        .photo-frame {
+          position: absolute;
+          top: 28px;
+          right: 24px;
+          padding: 5px;
+          background: transparent;
+        }
+        .photo-frame img { width: 66px; height: 88px; }
+        .hero-copy { padding-right: 75px; }
+        .summary { font-size: 13px; }
+        .contact { gap: 10px 16px; }
+        .entry-head { grid-template-columns: 1fr; gap: 2px; }
+        .date { grid-row: 1; }
+        .skill-row { grid-template-columns: 1fr; gap: 1px; }
+        .credentials { grid-template-columns: 1fr; }
+      }
+
+      @media print {
+        @page { size: A4; margin: 0; }
+        html, body { background: #fff; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .toolbar { display: none; }
+        .resume { width: auto; margin: 0; box-shadow: none; }
+        .page { width: 210mm; height: 297mm; overflow: hidden; }
+        .page:first-child { padding-top: 0; }
+        .hero {
+          grid-template-columns: 1fr 39mm;
+          margin: 0 -13mm 9mm;
+          padding: 10mm 13mm 8mm;
+        }
+        .hero-copy { padding-right: 0; }
+        .photo-frame {
+          position: static;
+          padding: 4mm;
+          background: rgb(185 201 204 / 28%);
+        }
+        .photo-frame img { width: 30mm; height: 40mm; }
+        .summary { font-size: 11.5px; }
+        .entry-head { grid-template-columns: 1fr auto; gap: 5mm; }
+        .date { grid-row: auto; }
+        .skill-row { grid-template-columns: 28mm 1fr; gap: 4mm; }
+        .credentials { grid-template-columns: 1fr 1fr; }
+      }
+
+      /* Recovered draft format: keep this section last so the original visual
+         language remains the source of truth while the content can grow. */
+      html { background: #eceef2; font-size: 13.5px; line-height: 1.55; }
+      .resume {
+        width: auto;
+        max-width: 840px;
+        margin: 26px auto;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 6px 28px #14202d1a;
+      }
+      .page {
+        min-height: 0;
+        padding: 0 46px 46px;
+        page-break-after: auto;
+      }
+      .hero {
+        grid-template-columns: 1fr 130px;
+        gap: 20px;
+        margin: 0 -46px 25px;
+        padding: 34px 46px;
+        border-bottom: 1px solid #e7eaef;
+        background: radial-gradient(120% 140% at 100% 0%, #0e7c861a, transparent 46%), #fff;
+      }
+      .hero::before { width: 5px; }
+      h1 { font-size: 32px; letter-spacing: -.03em; }
+      .romanized { margin-left: 10px; font-size: 14px; }
+      .role {
+        margin: 10px 0;
+        color: #0a5b63;
+        font-size: 12px;
+        letter-spacing: .06em;
+      }
+      .summary {
+        max-width: 570px;
+        font-size: 13.5px;
+        line-height: 1.55;
+      }
+      .contact {
+        gap: 18px;
+        margin-top: 16px;
+        font-size: 11.7px;
+      }
+      .photo-frame {
+        align-self: center;
+        width: 130px;
+        padding: 0;
+        overflow: hidden;
+        background: transparent;
+      }
+      .photo-frame img {
+        display: block;
+        width: 130px;
+        height: auto;
+        aspect-ratio: 413 / 531;
+        object-fit: contain;
+      }
+      section + section, section { margin-top: 25px; }
+      .section-title {
+        gap: 10px;
+        margin: 0 0 14px;
+        font-size: 13px;
+        letter-spacing: .08em;
+      }
+      .section-title::before {
+        width: 18px;
+        height: 3px;
+        border-radius: 0;
+      }
+      .entry { margin-bottom: 17px; padding-bottom: 17px; }
+      .entry + .entry {
+        padding-top: 0;
+        border-top: 0;
+        border-bottom: 1px dashed #edf0f4;
+      }
+      .entry:last-child { margin-bottom: 0; border-bottom: 0; }
+      .entry-head { gap: 24px; }
+      h3 { font-size: 14.5px; letter-spacing: 0; }
+      .date { font-size: 11.3px; }
+      .lead { margin: 3px 0; font-size: 12.2px; }
+      ul { margin-top: 9px; padding-left: 16px; }
+      li { margin: 4px 0; font-size: 12.3px; }
+      .tags { gap: 5px; margin-top: 9px; }
+      .tag {
+        border: 0;
+        background: #eef1f5;
+        color: #46505f;
+        font-size: 10.6px;
+        font-weight: 650;
+        padding: 2px 9px;
+      }
+      .skills { gap: 0; }
+      .skill-row {
+        grid-template-columns: 155px 1fr;
+        gap: 0;
+        padding: 6px 0;
+        border-bottom: 1px solid #f0f2f5;
+      }
+      .credentials { gap: 0 32px; }
+      .credential { padding: 6px 0; border-bottom-color: #f0f2f5; }
+
+      @media (max-width: 700px) {
+        .resume { margin: 0; border-radius: 0; }
+        .page { padding-right: 24px; padding-left: 24px; }
+        .hero {
+          grid-template-columns: 1fr;
+          margin-right: -24px;
+          margin-left: -24px;
+          padding: 34px 24px;
+        }
+        .hero-copy { padding-right: 0; }
+        .photo-frame {
+          position: static;
+          width: 110px;
+          padding: 0;
+        }
+        .photo-frame img { width: 110px; height: auto; }
+        .entry-head { grid-template-columns: 1fr; gap: 2px; }
+        .date { grid-row: auto; }
+        .skill-row { grid-template-columns: 1fr; gap: 2px; }
+        .credentials { grid-template-columns: 1fr; }
+      }
+
+      @media print {
+        html { background: #fff; }
+        .resume {
+          max-width: none;
+          margin: 0;
+          border-radius: 0;
+          overflow: visible;
+          box-shadow: none;
+        }
+        .page {
+          width: auto;
+          height: auto;
+          min-height: 0;
+          overflow: visible;
+          padding: 0 15mm 12mm;
+        }
+        .hero {
+          grid-template-columns: 1fr 39mm;
+          margin: 0 -15mm 7mm;
+          padding: 12mm 15mm 7mm;
+          border-bottom-color: #e7eaef;
+          background: radial-gradient(120% 140% at 100% 0%, #0e7c861a, transparent 46%), #fff;
+        }
+        .hero-copy { padding-right: 0; }
+        .photo-frame { position: static; width: 30mm; padding: 0; }
+        .photo-frame img { width: 30mm; height: auto; }
+        .entry, .skills, .credentials { break-inside: avoid; }
+        .entry-head { grid-template-columns: 1fr auto; }
+        .skill-row { grid-template-columns: 155px 1fr; }
+        .credentials { grid-template-columns: 1fr 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="toolbar" aria-label="이력서 도구">
+      <a class="primary" href="./ko-dubeom-resume.pdf" download>PDF 다운로드</a>
+      <a href="/">포트폴리오로 돌아가기</a>
+    </nav>
+
+    <main class="resume">
+      <div class="page">
+        <header class="hero">
+          <div class="hero-copy">
+            <div class="name-row">
+              <h1>고두범</h1>
+              <span class="romanized">Koh Du Beom</span>
+            </div>
+            <p class="role">FRONTEND-FOCUSED FULL-STACK SOFTWARE ENGINEER</p>
+            <p class="summary">
+              React·TypeScript 기반 프론트엔드를 중심으로 백엔드와 인프라까지 문제 해결 범위를 확장해 온 소프트웨어
+              엔지니어입니다. 3D 점군·GIS 플랫폼을 단독 개발하고, 서비스 아키텍처 개선과 클라우드 비용 절감, CI/CD 운영을
+              통해 코드 밖의 비즈니스 성과까지 연결했습니다.
+            </p>
+            <div class="contact">
+              <a href="mailto:bean3260@naver.com">bean3260@naver.com</a>
+              <a href="https://github.com/Koh-Du-Beom">github.com/Koh-Du-Beom</a>
+              <a href="https://dubeom.com">dubeom.com</a>
+            </div>
+          </div>
+          <div class="photo-frame">
+            <img src="./profile-photo.jpeg" alt="고두범 증명사진" />
+          </div>
+        </header>
+
+        <section>
+          <h2 class="section-title">CAREER</h2>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>주식회사 디프리 · 소프트웨어 엔지니어</h3>
+              <span class="date">2024.12 – 2026.06.30</span>
+            </div>
+            <p class="lead">비탈면 유지관리 플랫폼의 프론트엔드 단독 개발을 중심으로 백엔드, 클라우드 인프라, 폐쇄망 구축까지 수행</p>
+            <ul>
+              <li>React·TypeScript 기반 서비스의 요구사항 분석, 설계, 구현, 배포 및 운영 전 과정을 담당했습니다.</li>
+              <li>Spring Boot API 공동 개발과 외주 과업지시서·API 명세 작성, 일정 관리 및 결과물 검수를 수행했습니다.</li>
+              <li>Docker·nginx·GitHub Actions 기반 배포 환경과 Cloudflare·NCP 스토리지 아키텍처를 설계·운영했습니다.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>주식회사 틸론 · 하계 계절제 현장실습</h3>
+              <span class="date">2024.06.24 – 2024.08.19</span>
+            </div>
+            <p class="lead">VDI 인프라 운영 및 WebRTC 기술 연구 · 8주</p>
+            <ul>
+              <li>Dstation 9.0 서버 설치부터 템플릿 생성, 사용자 프로비저닝과 운영까지 VDI 전체 라이프사이클을 경험했습니다.</li>
+              <li>Active Directory 인증·롤 매핑과 사용자 일괄 생성, 네트워크·라이선스·레지스트리 장애를 진단하고 해결했습니다.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">SELECTED WORK</h2>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>급경사지안전협회 업무 시스템 개발</h3>
+              <span class="date">2026.01 – 2026.06</span>
+            </div>
+            <p class="lead">전자결재 · ERP · PMS 프론트엔드 단독 개발 · <span class="metric">FE 기여도 100%</span></p>
+            <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">MUI</span><span class="tag">React Query</span><span class="tag">jsPDF</span></div>
+            <ul>
+              <li>기안·상신·승인·반려, 조직도 결재선, 서명, PDF 생성·다운로드를 포함한 전자결재 시스템 전체를 구현했습니다.</li>
+              <li>프로젝트 등록·검색·상세, 타임라인, 인원 관리와 결재문서 연결을 포함한 PMS를 개발했습니다.</li>
+              <li>고객 요구사항을 기술 구현으로 구체화하고 사용자 매뉴얼을 작성했습니다.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>비탈면 유지관리 플랫폼 · dpre.kr</h3>
+              <span class="date">2024.12 – 2026.06</span>
+            </div>
+            <p class="lead">3D 점군·GIS 기반 시설물 관리 플랫폼 프론트엔드 단독 개발 · <span class="metric">기여도 98%</span></p>
+            <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Vite</span><span class="tag">Zustand</span><span class="tag">React Query</span><span class="tag">Three.js</span></div>
+            <ul>
+              <li>JavaScript 코드를 TypeScript로 전면 마이그레이션하고 FSD 아키텍처로 리팩터링해 의존성 방향을 단방향으로 정리했습니다.</li>
+              <li>대용량 LAS 점군 업로드를 안정화하고 분석 완료 이메일 API를 연동해 장시간 분석 결과를 자동 안내했습니다.</li>
+              <li>VWorld GIS 지도 위 시설물 검색·마커·좌표 시각화와 JWT 역할 기반 라우팅, 시설물 단위 권한 관리를 구현했습니다.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>클라우드 인프라 · CI/CD</h3>
+              <span class="date">2024.12 – 2026.06</span>
+            </div>
+            <p class="lead">전체 서비스 인프라 설계 및 서버리스 유틸리티 개발 · <span class="metric">기여도 100% · 월 비용 60% 절감</span></p>
+            <div class="tags"><span class="tag">GitHub Actions</span><span class="tag">Docker</span><span class="tag">nginx</span><span class="tag">Cloudflare</span><span class="tag">NCP</span></div>
+            <ul>
+              <li>Git Flow와 GitHub Actions, SCP, 심볼릭 링크 교체를 결합한 CI/CD와 nginx 리버스 프록시 기반 컨테이너 배포 환경을 구축했습니다.</li>
+              <li>NCP에서 Cloudflare R2로 스토리지를 마이그레이션하고 3D 파이프라인 버킷을 3분리해 월 비용을 60% 절감했습니다.</li>
+              <li>Cloudflare Workers 기반 Presigned URL 발급·이메일 전송 API와 fail2ban 영구 차단 정책을 운영했습니다.</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h2 class="section-title">SELECTED WORK · CONTINUED</h2>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>규제샌드박스 폐쇄망 인프라</h3>
+              <span class="date">2025.09 – 2026.06</span>
+            </div>
+            <p class="lead">보안구역 인프라 설계·구축 전담</p>
+            <div class="tags"><span class="tag">Docker</span><span class="tag">nginx</span><span class="tag">TLS</span><span class="tag">MinIO S3</span><span class="tag">VPN</span></div>
+            <ul>
+              <li>MinIO S3 L4 TCP Stream Proxy와 자체 CA TLS 종단으로 Presigned URL 서명 무결성을 보존했습니다.</li>
+              <li>VPN 원격 접속과 CC 인증 DB 암호화·OTP 2차 인증을 연동하고 ISO 25023 품질 인증을 취득했습니다.</li>
+              <li>아키텍처 문서, 포트맵, 방화벽 정책과 배포 가이드를 수립했습니다.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>Potree 3D Pointcloud Viewer</h3>
+              <span class="date">2024.12 – 2026.06</span>
+            </div>
+            <p class="lead">오픈소스 WebGL 뷰어 대규모 커스터마이징 · <span class="metric">기여도 80%</span></p>
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">Three.js</span><span class="tag">WebGL</span><span class="tag">Proj4</span><span class="tag">GeoServer</span></div>
+            <ul>
+              <li>3D 측정값·점수 자동 반영과 PDF 변환을 포함한 법정 보고서 양식을 구현했습니다.</li>
+              <li>좌표 기반 3D 이미지 어노테이션과 DEM 지표면 구분, Distance·Profile·Clipping 측정 도구를 고도화했습니다.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>백엔드 API 서버</h3>
+              <span class="date">2024.12 – 2026.06</span>
+            </div>
+            <p class="lead">Spring Boot 공동 개발 및 외주 발주·관리</p>
+            <div class="tags"><span class="tag">Java 21</span><span class="tag">Spring Boot 3.2</span><span class="tag">JPA</span><span class="tag">QueryDSL</span><span class="tag">MySQL</span><span class="tag">JWT</span></div>
+            <ul>
+              <li>JWT Access·Refresh Token 인증과 시설물 CRUD, 좌표 기반 중복 판별, 소프트 삭제·복원을 구현했습니다.</li>
+              <li>ERD, 13개 REST API, 스토리지·인증·삭제 정책을 담은 14페이지 기술 과업지시서를 작성하고 6주 외주 일정을 관리했습니다.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>회사 공식 홈페이지 · dpre.co.kr</h3>
+              <span class="date">2024.12 – 2026.06</span>
+            </div>
+            <p class="lead">6개 페이지 단독 설계·개발 및 Vercel 운영 · <span class="metric">기여도 100%</span></p>
+            <div class="tags"><span class="tag">Next.js 15</span><span class="tag">React 19</span><span class="tag">MapLibre GL</span><span class="tag">Zustand</span><span class="tag">Nodemailer</span></div>
+            <ul>
+              <li>GeoJSON 기반 전국 촬영현황 지도, 한·영 다국어 전환과 문의 이메일 자동 전달을 구현했습니다.</li>
+              <li>커스텀 도메인과 SEO를 최적화해 구글 “디프리” 검색 최상단 노출을 달성했습니다.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">UNIVERSITY PROJECTS</h2>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>코스콤 연계 데이터 기반 주식투자 포트폴리오</h3>
+              <span class="date">2024.09 – 2024.12</span>
+            </div>
+            <p class="lead">산학실전캡스톤 · 프론트엔드 기여도 100% · JWT 인증·API 구현</p>
+            <div class="tags"><span class="tag">Next.js 14</span><span class="tag">Zustand</span><span class="tag">Chart.js</span><span class="tag">SQLite</span><span class="tag">JWT</span></div>
+            <ul>
+              <li>자연어 기반 주식 분석 UI와 그래프 시각화, 포트폴리오 백테스팅, 관심종목 실시간 동기화를 구현했습니다.</li>
+              <li>react-window 가상 스크롤로 20,000개 이상 종목 렌더링을 최적화하고 Next.js API Route 기반 인증을 개발했습니다.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <h3>틸론 연계 WebRTC 다자간 화상회의 플랫폼</h3>
+              <span class="date">2024.03 – 2024.06</span>
+            </div>
+            <p class="lead">산학실전캡스톤 · 프론트엔드 개발</p>
+            <div class="tags"><span class="tag">React 18</span><span class="tag">TypeScript</span><span class="tag">OpenVidu</span><span class="tag">Redux Toolkit</span><span class="tag">Socket.io</span></div>
+            <ul>
+              <li>다자간 영상·음성, 화면 공유, 실시간 채팅과 Web Audio API 기반 장치 사전 점검을 구현했습니다.</li>
+              <li>JWT 인증 연동, Axios interceptor 토큰 자동 주입·만료 검증과 연결 정보 영속화를 개발했습니다.</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h2 class="section-title">SKILLS</h2>
+          <dl class="skills">
+            <div class="skill-row"><dt>Frontend</dt><dd>React, TypeScript, Next.js, Vite, MUI, Tailwind CSS, Zustand, React Query, Redux Toolkit</dd></div>
+            <div class="skill-row"><dt>Backend</dt><dd>Java, Spring Boot, Spring Security, JPA, QueryDSL, MySQL, JWT, REST API 설계</dd></div>
+            <div class="skill-row"><dt>3D / Spatial</dt><dd>Three.js, WebGL, Potree, LAS, MapLibre GL, GeoJSON, Proj4, GeoServer</dd></div>
+            <div class="skill-row"><dt>Infra / DevOps</dt><dd>Docker, GitHub Actions, nginx, Cloudflare, NCP, MinIO S3, Linux, VPN, TLS</dd></div>
+            <div class="skill-row"><dt>Architecture</dt><dd>Feature-Sliced Design, CI/CD, 서버리스 API, Object Storage 아키텍처</dd></div>
+          </dl>
+        </section>
+
+        <section>
+          <h2 class="section-title">EDUCATION · AWARDS · CERTIFICATIONS</h2>
+          <div class="credentials">
+            <div class="credential"><strong>전북대학교 컴퓨터공학과</strong><span>2019.02 – 2025.02</span></div>
+            <div class="credential"><strong>정보처리기사</strong><span>2024.12 취득</span></div>
+            <div class="credential"><strong>SQLD</strong><span>2024.09 취득</span></div>
+            <div class="credential"><strong>산학실전캡스톤 최우수상</strong><span>2024 · 전북대학교 SW중심대학</span></div>
+            <div class="credential"><strong>TOPCIT 495점</strong><span>2024.10 응시</span></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

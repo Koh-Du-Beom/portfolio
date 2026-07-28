@@ -271,6 +271,37 @@ export default function TetrahedronPage() {
         )}
       </AnimatePresence>
 
+      {/* Resume shortcut */}
+      <a
+        href="/resume"
+        className="group fixed bottom-6 right-20 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-zinc-800 shadow-lg md:backdrop-blur-md transition-all hover:scale-110 hover:border-zinc-600 focus-visible:scale-110 focus-visible:border-zinc-500 focus-visible:outline-none"
+        style={{ backgroundColor: "var(--cm-nav)" }}
+        aria-label="이력서 보기"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-zinc-300 transition-transform duration-200 group-hover:-translate-y-0.5 group-focus-visible:-translate-y-0.5"
+          aria-hidden="true"
+        >
+          <path d="M6 2h9l4 4v16H6z" />
+          <path d="M14 2v5h5M9 12h6M9 16h6M9 8h2" />
+        </svg>
+        <span
+          role="tooltip"
+          className="pointer-events-none absolute right-0 bottom-full mb-3 w-max translate-y-1 rounded-md border border-zinc-700 bg-zinc-900/95 px-3 py-1.5 text-xs font-medium text-zinc-100 opacity-0 shadow-xl backdrop-blur-md transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
+        >
+          이력서 보기
+          <span className="absolute top-full right-4 h-2 w-2 -translate-y-1/2 rotate-45 border-r border-b border-zinc-700 bg-zinc-900" />
+        </span>
+      </a>
+
       {/* Dark / Light Toggle */}
       <button
         onClick={() => setIsLight((p) => !p)}
