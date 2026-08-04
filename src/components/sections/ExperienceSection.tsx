@@ -23,12 +23,6 @@ const experiences = [
     period: "2024.12 ~ 2026.06.30",
     subtitle: "소프트웨어 엔지니어",
   },
-  {
-    title: "SK AI Leader Academy 4기",
-    period: "2026.07.14 ~ 현재",
-    subtitle: "AI 역량 확장",
-    current: true,
-  },
 ];
 
 export default function ExperienceSection() {
@@ -49,7 +43,7 @@ export default function ExperienceSection() {
         <div className="relative mt-12 hidden md:block">
           <div className="absolute top-[1.125rem] left-0 right-0 h-px bg-gradient-to-r from-zinc-700 to-blue-400/60" />
 
-          <div className="grid grid-cols-5 gap-4">
+          <div className="grid grid-cols-4 gap-6">
             {experiences.map((item, i) => (
               <motion.div
                 key={item.period}
@@ -59,10 +53,10 @@ export default function ExperienceSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className={`absolute top-[0.55rem] left-1/2 -translate-x-1/2 rounded-full border-2 border-blue-400 bg-zinc-950 ${item.current ? "h-4 w-4 shadow-[0_0_8px_rgba(96,165,250,0.6)]" : "h-3.5 w-3.5"}`} />
+                <div className="absolute top-[0.55rem] left-1/2 h-3.5 w-3.5 -translate-x-1/2 rounded-full border-2 border-blue-400 bg-zinc-950" />
 
                 <div className="text-center">
-                  <h3 className={`text-sm md:text-base font-semibold leading-snug ${item.current ? "text-blue-400" : "text-zinc-200"}`}>
+                  <h3 className="text-sm font-semibold leading-snug text-zinc-200 md:text-base">
                     {item.title}
                   </h3>
                   {item.subtitle && (
@@ -93,9 +87,9 @@ export default function ExperienceSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className={`absolute top-1 left-0 rounded-full border-2 border-blue-400 bg-zinc-950 ${item.current ? "h-4 w-4 shadow-[0_0_8px_rgba(96,165,250,0.6)]" : "h-3.5 w-3.5"}`} />
+                <div className="absolute top-1 left-0 h-3.5 w-3.5 rounded-full border-2 border-blue-400 bg-zinc-950" />
 
-                <h3 className={`text-sm font-semibold leading-snug ${item.current ? "text-blue-400" : "text-zinc-200"}`}>
+                <h3 className="text-sm font-semibold leading-snug text-zinc-200">
                   {item.title}
                 </h3>
                 {item.subtitle && (

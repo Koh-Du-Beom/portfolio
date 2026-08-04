@@ -31,11 +31,6 @@ const education = [
 
 const career = [
   {
-    period: "2026.07.14 ~ 현재",
-    company: "SK AI Leader Academy 4기",
-    role: "AI 역량 강화 및 동료들과의 학습·협업 경험 확장",
-  },
-  {
     period: "2024.12 ~ 2026.06.30",
     company: "DPRE",
     role: "풀스택 개발자",
