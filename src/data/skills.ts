@@ -37,7 +37,7 @@ export const skills: Skill[] = [
   // Architecture
   { name: "FSD", category: "architecture" },
   { name: "REST API 설계", category: "architecture" },
-  { name: "AI Agent Orchestration", category: "architecture" },
+  { name: "Claude Code · Multi-Agent Workflow", category: "architecture" },
 ];
 
 export const categoryColors: Record<Skill["category"], string> = {

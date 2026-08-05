@@ -22,10 +22,10 @@ import {
   SiMinio,
   SiPortainer,
   SiLinux,
+  SiClaude,
 } from "react-icons/si";
 import { GiBearFace } from "react-icons/gi";
 import { HiMap, HiServer, HiLink } from "react-icons/hi";
-import { HiCpuChip } from "react-icons/hi2";
 import { FaJava, FaLayerGroup, FaSearch } from "react-icons/fa";
 
 const S = 16;
@@ -70,5 +70,5 @@ export const skillIcons: Record<string, ReactNode> = {
   // Architecture
   FSD: <FaLayerGroup size={S} color="#A78BFA" />,
   "REST API \uC124\uACC4": <HiLink size={S} color="#60A5FA" />,
-  "AI Agent Orchestration": <HiCpuChip size={S} color="#34D399" />,
+  "Claude Code · Multi-Agent Workflow": <SiClaude size={S} color="#D97757" />,
 };
