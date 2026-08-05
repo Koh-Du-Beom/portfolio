@@ -25,6 +25,8 @@ export const metadata: Metadata = {
     "TypeScript",
     "Next.js",
     "Three.js",
+    "서버리스",
+    "MSA",
     "포트폴리오",
   ],
   authors: [{ name: "고두범" }],
@@ -75,6 +77,8 @@ const profileJsonLd = {
       "Three.js",
       "Spring Boot",
       "Docker",
+      "Microservices Architecture",
+      "Serverless Architecture",
     ],
   },
 };
