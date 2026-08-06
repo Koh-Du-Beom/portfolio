@@ -43,5 +43,6 @@ next-env.d.ts
 # claude
 .claude/
 
-# company-specific resume variants
+# local-only resume variants and platform profiles
 /archive/resumes/companies/
+/archive/resumes/platforms/

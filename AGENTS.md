@@ -24,3 +24,4 @@ When the user asks "아래의 채용공고를 참고하여, 이력서를 작성�
 3. Create or update the company-specific version in `archive/resumes/companies/<company>/`.
 4. Do not modify the source resume unless the user explicitly asks.
 5. Compare the customized version with the source, then verify important experience coverage, skill ordering, job-posting fit, local links/assets, and PDF page clipping.
+6. Treat resume platforms such as Saramin as distribution channels, not target companies. Store platform-specific copy-paste content under `archive/resumes/platforms/<platform>/` and keep company-specific applications under `archive/resumes/companies/<company>/`.
