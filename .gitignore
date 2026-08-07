@@ -43,6 +43,5 @@ next-env.d.ts
 # claude
 .claude/
 
-# local-only resume variants and platform profiles
-/archive/resumes/companies/
-/archive/resumes/platforms/
+# private career archive (managed as a separate Git repository)
+/archive/
