@@ -92,12 +92,12 @@ export const projects: Project[] = [
     description: "전체 서비스의 배포·스토리지 흐름과 서버리스 보조 API를 설계·운영.",
     bullets: [
       "GitHub Actions, Docker, nginx 기반 CI/CD 및 컨테이너 배포 환경 구축",
-      "NCP → Cloudflare R2 마이그레이션 — 월 비용 60% 절감",
+      "NCP → Cloudflare R2로 수천 개 객체를 이전하고 파일 수·해시·3D Viewer 로딩으로 무결성과 서비스 호환성 검증",
       "NCP Cloud Functions 기반 presigned URL 발급과 Cloud Outbound Mailer 연동 구현",
       "Cloudflare Workers로 R2 객체의 공개 URL 조회 로직을 구현하고, 원본·변환·서비스 데이터를 용도별 버킷으로 분리해 3D 분석 파이프라인의 저장·조회 흐름 설계",
     ],
     metrics: [
-      { label: "비용 절감", value: "60%" },
+      { label: "객체 이전", value: "수천 개" },
       { label: "역할", value: "설계·운영 전담" },
     ],
   },
