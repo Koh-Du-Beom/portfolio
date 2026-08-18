@@ -111,7 +111,7 @@ export const projects: Project[] = [
     description:
       "규제샌드박스 보안구역의 폐쇄망 인프라를 설계·구축하고 보안·품질 인증에 대응.",
     bullets: [
-      "S3 호환 MinIO 앞단에 L4 TCP stream proxy와 자체 CA TLS 종단을 구성해 presigned URL 서명 무결성 보존",
+      "nginx 경유 후 403 SignatureDoesNotMatch가 발생한 MinIO presigned URL 문제를 내부 CA 인증서와 요청을 변경하지 않는 TCP 프록시 구성으로 해결",
       "VPN 기반 원격 접속과 CC 인증 DB 암호화·OTP 2차 인증 연동",
       "ISO/IEC 25023 기반 품질시험 대응 및 KOLAS 공인시험성적서 발급",
       "아키텍처 문서, 포트맵, 방화벽 정책 및 배포 가이드 수립",
