@@ -60,11 +60,11 @@ export const projects: Project[] = [
     description:
       "3D 점군·GIS 기반 비탈면 유지관리 플랫폼의 프론트엔드를 전담하고, 기능별 분석 서비스로 구성된 서버리스 MSA의 설계 논의와 프론트엔드 연동에 참여.",
     bullets: [
-      "JavaScript → TypeScript 전면 마이그레이션",
+      "JavaScript → TypeScript 전환으로 API 응답·도메인 모델의 타입 계약 명시",
       "Feature-Sliced Design(FSD) 아키텍처 전면 리팩토링 — 기능 간 cross-import 제거, 의존성 방향 단방향 강제",
       "팀원과 이미지 복원·LAS 변환·정합·변위·암반 분석의 서버리스 분리 방향을 논의하고, 팀원이 구현한 단일 분석 API 호출과 비동기 완료 알림 흐름을 프론트엔드에 연동",
       "대용량 LAS 업로드 안정화와 VWorld GIS 기반 시설물 검색·좌표 시각화",
-      "Potree Distance·Profile·Clipping 측정 도구를 비탈면 점검 흐름에 맞게 고도화하고 CSV 데이터를 3D 공간에 오버레이",
+      "Potree 기반 거리·단면·영역 측정 도구를 비탈면 점검 흐름에 맞게 고도화하고 CSV 데이터를 3D 공간에 시각화",
       "좌표 기반 3D 이미지 어노테이션과 DEM 지표면·지형물 구분 기능 구현",
       "3D 측정값 자동 반영, 점수 산정 및 PDF 변환을 포함한 법정 보고서 양식 구현",
       "JWT 역할 기반 라우팅과 시설물 단위 접근 권한 UI 구현",
