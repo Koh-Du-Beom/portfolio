@@ -47,6 +47,8 @@ export default function NotFound() {
           alt=""
           width={1254}
           height={1254}
+          preload
+          sizes="(max-width: 639px) 320px, 448px"
           className="h-auto w-full"
         />
       </div>
