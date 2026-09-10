@@ -61,7 +61,7 @@ export const projects: Project[] = [
       "3D 점군·GIS 기반 비탈면 유지관리 플랫폼의 프론트엔드를 전담하고, 기능별 분석 서비스로 구성된 서버리스 MSA의 설계 논의와 프론트엔드 연동에 참여.",
     bullets: [
       "JavaScript → TypeScript 전환으로 API 응답·도메인 모델의 타입 계약 명시",
-      "Feature-Sliced Design(FSD) 아키텍처 전면 리팩토링 — 기능 간 cross-import 제거, 의존성 방향 단방향 강제",
+      "기능 중심으로 구조를 재편하고, FSD의 app/features/shared 책임 분리와 단방향 의존 원칙을 적용",
       "팀원과 이미지 복원·LAS 변환·정합·변위·암반 분석의 서버리스 분리 방향을 논의하고, 팀원이 구현한 단일 분석 API 호출과 비동기 완료 알림 흐름을 프론트엔드에 연동",
       "대용량 LAS 업로드 안정화와 VWorld GIS 기반 시설물 검색·좌표 시각화",
       "Potree 기반 거리·단면·영역 측정 도구를 비탈면 점검 흐름에 맞게 고도화하고 CSV 데이터를 3D 공간에 시각화",
@@ -151,15 +151,16 @@ export const projects: Project[] = [
       "Next.js 15",
       "React 19",
       "MUI",
-      "MapLibre GL",
+      "GeoJSON",
+      "SVG",
       "Framer Motion",
       "Nodemailer",
     ],
     description:
-      "회사 공식 홈페이지 6개 페이지를 단독 설계·개발하고 dpre.co.kr 도메인으로 Vercel에 배포·운영.",
+      "회사 공식 홈페이지의 7개 라우트를 단독 설계·개발하고 dpre.co.kr 도메인으로 Vercel에 배포·운영.",
     bullets: [
       "dpre.co.kr 커스텀 도메인 연결 및 Vercel 배포/운영",
-      "MapLibre GL + GeoJSON 전국 촬영현황 지도 시각화",
+      "GeoJSON 좌표를 SVG로 변환해 전국 촬영 현황을 시각화",
       "Zustand 기반 한/영 다국어 전환",
       "Nodemailer를 통한 문의사항 이메일 자동 전달",
       "SEO 최적화 → 구글 \"디프리\" 검색 최상단 노출",
@@ -188,7 +189,7 @@ export const projects: Project[] = [
       "프롬프트 기반 주식 분석 UI — 자연어 → AI 분석 → 그래프 시각화",
       "백테스팅 시뮬레이션 — 종목/비율 → 과거 수익률",
       "관심종목 시스템 — Zustand + SQLite, 실시간 동기화",
-      "react-window 가상 스크롤로 20,000+ 종목 렌더링 최적화",
+      "약 2,400개 종목의 기술지표 테이블에 react-window 가상 스크롤을 적용",
       "Next.js API Route + JWT + bcrypt 풀스택 인증",
     ],
     metrics: [
