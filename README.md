@@ -4,6 +4,7 @@
 
 - 배포 주소: [dubeom.com](https://dubeom.com)
 - GitHub: [Koh-Du-Beom](https://github.com/Koh-Du-Beom)
+- 노션 소개·연락 안내: [dubeom.com/notion](https://dubeom.com/notion)
 
 ## 주요 구성
 
@@ -12,6 +13,21 @@
 - 프로젝트별 담당 업무, 기술 스택, 성과 및 기여도
 - 데스크톱과 모바일에 대응하는 반응형 인터페이스
 - 검색 엔진을 위한 Metadata, Sitemap, Robots 설정
+- Contact의 GitHub·Instagram·Notion 링크와 방문자용 노션 소개 화면
+
+## 노션과 지원 자료
+
+Contact의 `Notion` 버튼은 공개 소개·연락 화면 `/notion`을 연다. 이 화면의 `개인 노션 열기`로 개인 대시보드에 접근하며, 실제 기록은 권한이 있는 노션 계정으로만 볼 수 있다.
+
+이 저장소는 사이트 코드와 공개 안내를 관리한다. 이력서·지원 현황·채용 후보·노션 관리 문서는 비공개 `portfolio-applications` 저장소에서 관리하고, `archive/` 서브모듈로 연결한다. 사이트 빌드는 `archive/`에 의존하지 않으며 `.vercelignore`로 배포 업로드에서 제외한다.
+
+본인 계정으로 비공개 자료까지 받을 때만 실행한다.
+
+```bash
+git submodule update --init archive
+```
+
+지원 자료를 수정하고 비공개 저장소에 커밋·푸시한 다음, 이 저장소에서 `archive` 참조를 커밋·푸시한다. 이렇게 하면 공개 저장소에는 비공개 파일 내용 대신 해당 버전의 참조만 남는다. 지원 상태와 노션의 현재 반영 규칙은 `archive/resumes/notion/README.md`에서 관리한다. 자동동기화와 공고 수집 예약은 아직 설정하지 않았다.
 
 ## 기술 스택
 
