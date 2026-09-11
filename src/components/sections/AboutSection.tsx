@@ -31,7 +31,7 @@ const education = [
 
 const career = [
   {
-    period: "2024.12 ~ 2026.06.30",
+    period: "2024.12 ~ 2026.07.01",
     company: "DPRE",
     role: "풀스택 개발자",
   },
