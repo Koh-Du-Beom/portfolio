@@ -9,6 +9,7 @@ import ts from "typescript";
 test("email copy handles success, denied permission, and unavailable clipboard", async () => {
   let message = "";
   let copied;
+  let dismiss;
   const navigator = { clipboard: { writeText: async (text) => { copied = text; } } };
   const require = createRequire(import.meta.url);
   const exports = {};
@@ -19,14 +20,25 @@ test("email copy handles success, denied permission, and unavailable clipboard",
   runInNewContext(outputText, {
     exports,
     navigator,
+    clearTimeout: () => {},
+    setTimeout: (callback, delay) => {
+      assert.equal(delay, 2000);
+      dismiss = callback;
+    },
     require: (name) => name === "react"
-      ? { useState: () => [message, (value) => { message = value; }] }
+      ? {
+        useState: () => [message, (value) => { message = value; }],
+        useRef: () => ({ current: undefined }),
+        useEffect: () => {},
+      }
       : require(name),
   });
   const click = exports.default().props.children[0].props.onClick;
   await click();
   assert.equal(copied, "bean3260@naver.com");
   assert.equal(message, "이메일 복사 완료");
+  dismiss();
+  assert.equal(message, "");
   navigator.clipboard.writeText = async () => { throw new Error("Permission denied"); };
   await click();
   assert.equal(message, "복사하지 못했어요. 직접 복사해 주세요: bean3260@naver.com");
