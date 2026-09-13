@@ -1,8 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { FaLinkedinIn } from "react-icons/fa";
 
 const links = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/%EB%91%90%EB%B2%94-%EA%B3%A0-304b1b40b/",
+    icon: <FaLinkedinIn size={20} aria-hidden="true" />,
+  },
   {
     label: "GitHub",
     href: "https://github.com/Koh-Du-Beom",
@@ -67,7 +73,7 @@ export default function ContactSection() {
         </motion.div>
 
         <motion.div
-          className="mt-6 flex justify-center gap-6"
+          className="mt-6 flex flex-wrap justify-center gap-6"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
