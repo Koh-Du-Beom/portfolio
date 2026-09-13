@@ -31,7 +31,7 @@ const education = [
 
 const career = [
   {
-    period: "2024.12 ~ 2026.06.30",
+    period: "2024.12 ~ 2026.07.01",
     company: "DPRE",
     role: "풀스택 개발자",
   },
@@ -47,6 +47,7 @@ const awards = [
 ];
 
 const certifications = [
+  { title: "TOEIC Speaking IH · 150점", period: "2026.09.11 취득" },
   { title: "정보처리기사", period: "2024.12 취득" },
   { title: "TOPCIT 495점", period: "2024.10 응시" },
   { title: "SQLD", period: "2024.09 취득" },
@@ -203,7 +204,7 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <h3 className="text-xl font-bold text-zinc-100">Certifications</h3>
+            <h3 className="text-xl font-bold text-zinc-100">Certifications & Languages</h3>
             <div className="mt-4 space-y-4">
               {certifications.map((cert, i) => (
                 <div

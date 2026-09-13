@@ -1,0 +1,4 @@
+archive/
+.codex/
+.claude/
+*.tsbuildinfo
