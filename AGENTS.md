@@ -25,3 +25,9 @@ When the user asks "아래의 채용공고를 참고하여, 이력서를 작성�
 4. Do not modify the source resume unless the user explicitly asks.
 5. Compare the customized version with the source, then verify important experience coverage, skill ordering, job-posting fit, local links/assets, and PDF page clipping.
 6. Treat resume platforms such as Saramin as distribution channels, not target companies. Store platform-specific copy-paste content under `archive/resumes/platforms/<platform>/` and keep company-specific applications under `archive/resumes/companies/<company>/`.
+
+## Application Completion
+
+When the user says a company application is complete (e.g. “APR 지원완료”, “제출 완료”, “접수 완료”), treat that as confirmation and authorization to update both `archive/resumes/companies/APPLICATIONS.md` and the Notion application tracker in the same turn, without asking for permission again. Resolve the company and role from the conversation; clarify only if the target application remains ambiguous.
+
+Follow the synchronization rules in [`archive/AGENTS.md`](archive/AGENTS.md#application-status-synchronization), including the CSV, related status notes, and verification. Do not finish after updating only the local file, and do not create a separate `application.md`.
