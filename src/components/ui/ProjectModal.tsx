@@ -49,7 +49,7 @@ function ModalContent({ project, onClose }: { project: Project; onClose: () => v
               </svg>
             </button>
 
-            <header>
+            <header className="pr-6">
               <h3 className="text-xl font-bold text-zinc-100">{project.title}</h3>
               <p className="mt-1 text-sm text-zinc-400">{project.period}</p>
             </header>
@@ -70,7 +70,7 @@ function ModalContent({ project, onClose }: { project: Project; onClose: () => v
             </p>
 
             {project.metrics && (
-              <div className="mt-4 flex gap-4">
+              <div className="mt-4 flex flex-wrap gap-4">
                 {project.metrics.map((m) => (
                   <div
                     key={m.label}
@@ -83,9 +83,9 @@ function ModalContent({ project, onClose }: { project: Project; onClose: () => v
               </div>
             )}
 
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 space-y-4">
               {project.bullets.map((bullet, i) => (
-                <li key={i} className="flex gap-2.5 text-sm text-zinc-200">
+                <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-zinc-200">
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(96,165,250,0.5)]" />
                   {bullet}
                 </li>

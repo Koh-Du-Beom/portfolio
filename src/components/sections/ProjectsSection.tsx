@@ -61,12 +61,12 @@ export default function ProjectsSection() {
                 {project.title}
               </h3>
               <p className="mt-1 text-sm text-zinc-500">{project.period}</p>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-300 line-clamp-2">
+              <p className="mt-3 text-sm leading-relaxed text-zinc-300">
                 {project.description}
               </p>
 
               {project.metrics && (
-                <div className="mt-4 flex gap-3">
+                <div className="mt-4 flex flex-wrap gap-3">
                   {project.metrics.map((m) => (
                     <span
                       key={m.label}

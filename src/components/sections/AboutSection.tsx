@@ -23,7 +23,7 @@ const highlights = [
 
 const education = [
   {
-    period: "2019.02 ~ 2025.02",
+    period: "2019.03 ~ 2025.02",
     institution: "전북대학교",
     detail: "컴퓨터공학과",
   },
