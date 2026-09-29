@@ -25,7 +25,7 @@ import {
   SiClaude,
 } from "react-icons/si";
 import { GiBearFace } from "react-icons/gi";
-import { HiMap, HiServer, HiLink } from "react-icons/hi";
+import { HiServer, HiLink } from "react-icons/hi";
 import { FaJava, FaLayerGroup, FaSearch } from "react-icons/fa";
 
 const S = 16;
@@ -43,7 +43,6 @@ export const skillIcons: Record<string, ReactNode> = {
   "Three.js / Potree": <SiThreedotjs size={S} color="currentColor" />,
   "Three.js": <SiThreedotjs size={S} color="currentColor" />,
   "Chart.js": <SiChartdotjs size={S} color="#FF6384" />,
-  "MapLibre GL": <HiMap size={S} color="#4264FB" />,
   "Framer Motion": <SiFramer size={S} color="#0055FF" />,
 
   // Backend

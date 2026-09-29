@@ -15,7 +15,6 @@ export const skills: Skill[] = [
   { name: "TanStack Query", category: "frontend" },
   { name: "Three.js", category: "frontend" },
   { name: "Chart.js", category: "frontend" },
-  { name: "MapLibre GL", category: "frontend" },
   { name: "Framer Motion", category: "frontend" },
   // Backend
   { name: "Java", category: "backend" },
