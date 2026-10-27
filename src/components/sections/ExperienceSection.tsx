@@ -23,6 +23,11 @@ const experiences = [
     period: "2024.12 ~ 2026.07.01",
     subtitle: "소프트웨어 엔지니어",
   },
+  {
+    title: "[교육] SK AI Leader Academy",
+    subtitle: "SKALA · 다국어 상담 서비스 PM · 서비스 설계·AI Agent 검증",
+    period: "2026.07.14 ~ 현재",
+  },
 ];
 
 export default function ExperienceSection() {
@@ -43,7 +48,7 @@ export default function ExperienceSection() {
         <div className="relative mt-12 hidden md:block">
           <div className="absolute top-[1.125rem] left-0 right-0 h-px bg-gradient-to-r from-zinc-700 to-blue-400/60" />
 
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-5 gap-6">
             {experiences.map((item, i) => (
               <motion.div
                 key={item.period}
